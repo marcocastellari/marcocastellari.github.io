@@ -30,12 +30,17 @@ subtitle: My academic and industry careers
 #### _Università degli Studi di Ferrara, Sep 2015 -- Mar 2018_
 #### _Grade: 110/110 With Honors_
 - __Thesis__: "Performances Evaluation of Emerging Technologies FPGAs"
+- __Main topics__: FPGAs, RRAM, simulation
+- The goal of this thesis is to characterize and modelling variability and reliability, taking into account also performances and power consumption, both in commercial FPGAs and RRAM-based FPGAs. The purpose is to evaluate the overall performances and reliability of a consolidated CMOS technology compared to the emerging RRAM technology.
+
 
 ## 2.2 - BSc in Electronic and Computer Science Engineering
 #### _Università degli Studi di Ferrara, Sep 2012 -- Jul 2015_
 #### _Grade: 110/110_
 
 - __Thesis__: "Localization Systems based on LTE Signals of Opportunity"
+- __Main topics__: LTE, passive localization, simulation, telecommunication 
+- This study has the aim to investigate the possibility to use signals of opportunity, as LTE, to detect and localize targets. The main reasons to study this topic are the system cost reduction, the intrinsic security and the environmental impact as a green technology.
 
 ## 2.3 - High School Diploma in Electronic and Telecommunications Industrial Technician
 #### _ITIS G. Marconi (Lugo), Sep 2007 -- Jul 2012_
