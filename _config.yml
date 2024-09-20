@@ -28,11 +28,11 @@ author: Marco Castellari
 
 navbar-links:
   <i class="fa fa-user" aria-hidden="true"></i> About Me: "aboutme"
-  <i class="fa fa-book" aria-hidden="true"></i> Scientific CV: "scientific-cv"
+  <i class="fa fa-book" aria-hidden="true"></i>CV: "cv"
   <i class="fa fa-rss" aria-hidden="true"></i> Blog: "blog"
   <i class="fa fa-rocket" aria-hidden="true"></i> Projects:
-    - <i class="fa fa-code" aria-hidden="true"></i> Learning C++: "projects-learning-cpp"
-    - <i class="fa fa-cogs" aria-hidden="true"></i> Autonomous Unicycle: "projects-autonomous-unicycle"
+    - <i class="fa fa-code" aria-hidden="true"></i> Learning C++: "projects-test"
+    #- <i class="fa fa-cogs" aria-hidden="true"></i> Autonomous Unicycle: "projects-autonomous-unicycle"
   #<i class="fas fa-atom" aria-hidden="true"></i> Resources:
     #- Beautiful Jekyll: "https://beautifuljekyll.com"
     #- Learn markdown: "https://www.markdowntutorial.com/"
