@@ -31,7 +31,7 @@ navbar-links:
   <i class="fa fa-book" aria-hidden="true"></i>CV: "cv"
   #<i class="fa fa-rss" aria-hidden="true"></i> Blog: "blog"
   <i class="fa fa-rocket" aria-hidden="true"></i> Projects:
-    - <i class="fa fa-code" aria-hidden="true"></i> Learning C++: "projects-test"
+    - <i class="fa fa-code" aria-hidden="true"></i> Test project : "projects-test"
     #- <i class="fa fa-cogs" aria-hidden="true"></i> Autonomous Unicycle: "projects-autonomous-unicycle"
   #<i class="fas fa-atom" aria-hidden="true"></i> Resources:
     #- Beautiful Jekyll: "https://beautifuljekyll.com"
@@ -61,17 +61,17 @@ round-avatar: true
 # You can change the order that they show up on the page by changing the order here.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
-  email: "someone@example.com"
-  rss: true  # remove this line if you don't want to show an RSS link at the bottom
-  facebook: deanattali
-  github: daattali
-  twitter: daattali
-  patreon: DeanAttali
-  youtube: "@daattali"
-  whatsapp: 15551212
+  email: "marco.castellari01@gmail.com"
+#  rss: true  # remove this line if you don't want to show an RSS link at the bottom
+#  facebook: deanattali
+  github: marcocastellari
+#  twitter: daattali
+#  patreon: DeanAttali
+#  youtube: "@daattali"
+#  whatsapp: 15551212
 #  medium: yourname
 #  reddit: yourname
-#  linkedin: daattali
+  linkedin: marco-castellari01
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
