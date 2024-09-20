@@ -15,7 +15,7 @@ subtitle: My academic and industry careers
 	- [2.3 - High School Diploma in Electronic and Telecommunications Industrial Technician](#23---high-school-diploma-in-electronic-and-telecommunications-industrial-technician)
 - [3 - Summer Internship](#3---summer-internship)
 	- [3.1 - Fermilab Summer Internship](#31---fermilab-summer-internship) 
-	- [3.1 - MPSoC Research Group](#31---mpsoc-research-group) 
+	- [3.2 - MPSoC Research Group](#31---mpsoc-research-group) 
 - [4 - Publications](#3---publications)
 
 ---
