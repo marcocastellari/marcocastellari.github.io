@@ -22,12 +22,12 @@ subtitle: My academic and industry careers
 # 1 - Work Experience
 ## 1.1 - R&D Firmware Engineer in Motorsport
 #### _Mectronik s.r.l., May 2023 -- Present_
-- __Work field__: Embedded Firmware and Hardware designer for Motorsport datalogger and dashboard
--
+__Embedded Firmware and Hardware designer for Motorsport datalogger and dashboard__
+- todo
 
 ## 1.2 - R&D Software Engineer
 #### _SACMI Imola, Apr 2018 -- April 2023_
-- __Work field__: Embedded FW-SW Engineer for Automation
+__Embedded FW-SW Engineer for Automation__
 - The design of automation machinery is growing faster not only in terms of processes to control but also in complexity and big data processing. Hence, more computational power is required and new solutions to manage the real-time data processing must be investigated. In fact, this work has the aim to develop new architectural solutions employing GPU to take advantage of the huge parallelism to accelerate data processing.
 
 ---
@@ -63,7 +63,7 @@ subtitle: My academic and industry careers
 #### _Fermi National Accelerator Laboratory at Technical Division, Batavia (USA, IL), Jul 2017 -- Sep 2017_
 - __Research field__: "Novel RF Tuning of Jacketed Multi-Cell SRF Cavities"
 - __Main topics__: SRF cavity, Bead-Pull RF Measurement System, FEM, simulation 
-- Superconducting Radio Frequency (SRF) cavities have a huge impact in the particle accelerator science because of their ultra-low loss. The attention of this project has been focused on multicell SRF cavities with the aim to provide a solution for dressed cavities that have field flatness issue of being lower than what is acceptable for cryomodule assembly. A tuning procedure for dressed multi-cell cavities capable of controlling the deformation of each single cell has been developed, both theoretically, with FEM analysis, and experimentally, with tests to demonstrate the validity of the proposed approach and develop the full tuning procedure.
+- Superconducting Radio Frequency (SRF) cavities have a huge impact in the particle accelerator science because of their ultra-low loss. The attention of this project has been focused on multicell SRF cavities with the aim to provide a solution for dressed cavities that have field flatness issue of being lower than what is acceptable for cryomodule assembly. A tuning procedure for dressed multi-cell cavities capable of controlling the deformation of each single cell has been developed, both theoretically, with FEM analysis, and experimentally, with tests to demonstrate the validity of the proposed approach and develop the full tuning procedure.
 
 ## 3.2 - MPSoC Research Group
 #### _Università degli Studi di Ferrara, Aug 2015 --- Sep 2015_
