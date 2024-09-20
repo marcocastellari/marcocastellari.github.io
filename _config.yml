@@ -29,7 +29,7 @@ author: Marco Castellari
 navbar-links:
   <i class="fa fa-user" aria-hidden="true"></i> About Me: "aboutme"
   <i class="fa fa-book" aria-hidden="true"></i>CV: "cv"
-  <i class="fa fa-rss" aria-hidden="true"></i> Blog: "blog"
+  #<i class="fa fa-rss" aria-hidden="true"></i> Blog: "blog"
   <i class="fa fa-rocket" aria-hidden="true"></i> Projects:
     - <i class="fa fa-code" aria-hidden="true"></i> Learning C++: "projects-test"
     #- <i class="fa fa-cogs" aria-hidden="true"></i> Autonomous Unicycle: "projects-autonomous-unicycle"
@@ -43,7 +43,7 @@ navbar-links:
 
 # Image to show in the navigation bar - works best with a square image
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/assets/img/profile-picture.JPG"
+avatar: "/assets/img/profile-picture.jpg"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
 round-avatar: true
