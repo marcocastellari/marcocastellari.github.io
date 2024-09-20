@@ -7,7 +7,8 @@ subtitle: My academic and industry careers
 ## Table of Contents
 - [1 - Work Experience](#1---work-experience)
 	- [1.1 - R&D Firmware Engineer in Motorsport](#11---r&d-firmware-engineer-in-motorsport)
-	- [1.2 - R&D Software Engineer](#12---r&d-software-engineer)
+	- [1.2 - Racetrack engineer](#12---racetrack-engineer)
+	- [1.3 - R&D Software Engineer](#13---r&d-software-engineer)
 - [2 - Education](#2---education)
 	- [2.1 - MSc in Electronic and Telecommunications Engineering](#21---msc-in-electronic-and-telecommunications-engineering)
 	- [2.2 - BSc in Electronic and Computer Science Engineering](#22---bsc-in-electronic-and-computer-science-engineering)
@@ -25,7 +26,11 @@ subtitle: My academic and industry careers
 __Embedded Firmware and Hardware designer for Motorsport datalogger and dashboard__
 - todo
 
-## 1.2 - R&D Software Engineer
+## 1.2 - Racetrack engineer 
+#### _Extreme Racing Service - CIV 2024_
+#### _LN Racing - Pirelli Cup 2023_
+
+## 1.3 - R&D Software Engineer
 #### _SACMI Imola, Apr 2018 -- April 2023_
 __Embedded FW-SW Engineer for Automation__
 - The design of automation machinery is growing faster not only in terms of processes to control but also in complexity and big data processing. Hence, more computational power is required and new solutions to manage the real-time data processing must be investigated. In fact, this work has the aim to develop new architectural solutions employing GPU to take advantage of the huge parallelism to accelerate data processing.
