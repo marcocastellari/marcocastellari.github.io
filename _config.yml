@@ -31,7 +31,7 @@ navbar-links:
   <i class="fa fa-book" aria-hidden="true"></i>CV: "cv"
   #<i class="fa fa-rss" aria-hidden="true"></i> Blog: "blog"
   <i class="fa fa-rocket" aria-hidden="true"></i> Projects:
-    - <i class="fa fa-code" aria-hidden="true"></i> Test project : "projects-test"
+    - <i class="fa fa-code" aria-hidden="true"></i> Test project : "project-test"
     #- <i class="fa fa-cogs" aria-hidden="true"></i> Autonomous Unicycle: "projects-autonomous-unicycle"
   #<i class="fas fa-atom" aria-hidden="true"></i> Resources:
     #- Beautiful Jekyll: "https://beautifuljekyll.com"
@@ -96,7 +96,7 @@ social-network-links:
 
 # If you want your website to generate an RSS feed, provide a description
 # The URL for the feed will be https://<your_website>/feed.xml
-rss-description: This website is a virtual proof that I'm awesome
+rss-description: This is Marco's website
 
 ###########################
 # --- General options --- #
