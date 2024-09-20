@@ -22,9 +22,13 @@ subtitle: My academic and industry careers
 # 1 - Work Experience
 ## 1.1 - R&D Firmware Engineer in Motorsport
 #### _Mectronik s.r.l., May 2023 -- Present_
+- __Work field__: Embedded Firmware and Hardware designer for Motorsport datalogger and dashboard
+-
 
 ## 1.2 - R&D Software Engineer
 #### _SACMI Imola, Apr 2018 -- April 2023_
+- __Work field__: Embedded FW-SW Engineer for Automation
+- The design of automation machinery is growing faster not only in terms of processes to control but also in complexity and big data processing. Hence, more computational power is required and new solutions to manage the real-time data processing must be investigated. In fact, this work has the aim to develop new architectural solutions employing GPU to take advantage of the huge parallelism to accelerate data processing.
 
 ---
 
