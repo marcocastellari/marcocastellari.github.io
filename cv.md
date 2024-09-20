@@ -34,16 +34,20 @@ subtitle: My academic and industry careers
 ## 2.2 - BSc in Electronic and Computer Science Engineering
 #### _Università degli Studi di Ferrara, Sep 2012 -- Jul 2015_
 #### _Grade: 110/110_
+
 - __Thesis__: "Localization Systems based on LTE Signals of Opportunity"
 
 ## 2.3 - High School Diploma in Electronic and Telecommunications Industrial Technician
 #### _ITIS G. Marconi (Lugo), Sep 2007 -- Jul 2012_
 #### _Grade: 100/100 With Honors_
+
 - __Exam Project__: "Obstacle Avoiding Robot Veichle"
 
 ---
 
 # 3 - Publications
-- [C3] M. H. Awida, D. Passarelli, _M. Castellari_, A. Tesi and T. Khabiboulline, "Tuning of Multicell Superconducting Accelerating Cavities Using Pressurized Balloons",  _IEEE Transactions on Applied Superconductivity_, 2022 ([paper link](https://ieeexplore.ieee.org/abstract/document/9691897))
-- [C2] C. Zambelli, _M. Castellari_, P. Olivo and D. Bertozzi, "Correlating Power Efficiency and Lifetime to Programming Strategies in RRAM-Based FPGAs", _New Generation of CAS (NGCAS)_, 2018 ([paper link](https://ieeexplore.ieee.org/document/8572050))
-- [C1] M. Tala, _M. Castellari_, M. Balboni and D. Bertozzi, "Populating and exploring the design space of wavelength-routed optical network-on-chip topologies by leveraging the add-drop filtering primitive" _Tenth IEEE/ACM International Symposium on Networks-on-Chip (NOCS)_, 2016 ([paper link](https://ieeexplore.ieee.org/document/7579331))
+- [C3] M. H. Awida, D. Passarelli, __M. Castellari__, A. Tesi and T. Khabiboulline, "Tuning of Multicell Superconducting Accelerating Cavities Using Pressurized Balloons",  _IEEE Transactions on Applied Superconductivity_, 2022 ([paper link](https://ieeexplore.ieee.org/abstract/document/9691897))
+
+- [C2] C. Zambelli, __M. Castellari__, P. Olivo and D. Bertozzi, "Correlating Power Efficiency and Lifetime to Programming Strategies in RRAM-Based FPGAs", _New Generation of CAS (NGCAS)_, 2018 ([paper link](https://ieeexplore.ieee.org/document/8572050))
+
+- [C1] M. Tala, __M. Castellari__, M. Balboni and D. Bertozzi, "Populating and exploring the design space of wavelength-routed optical network-on-chip topologies by leveraging the add-drop filtering primitive" _Tenth IEEE/ACM International Symposium on Networks-on-Chip (NOCS)_, 2016 ([paper link](https://ieeexplore.ieee.org/document/7579331))
