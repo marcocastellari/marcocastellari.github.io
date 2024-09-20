@@ -32,6 +32,7 @@ navbar-links:
   #<i class="fa fa-rss" aria-hidden="true"></i> Blog: "blog"
   <i class="fa fa-rocket" aria-hidden="true"></i> Projects:
     - <i class="fa fa-code" aria-hidden="true"></i> Test project : "project-test"
+    - <i class="fa-solid fa-microchip"></i> Test project 2 : "project-test2" 
     #- <i class="fa fa-cogs" aria-hidden="true"></i> Autonomous Unicycle: "projects-autonomous-unicycle"
   #<i class="fas fa-atom" aria-hidden="true"></i> Resources:
     #- Beautiful Jekyll: "https://beautifuljekyll.com"
