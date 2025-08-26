@@ -1,0 +1,21 @@
+{
+  "name": "hugo-personal-website",
+  "version": "1.0.0",
+  "description": "Personal engineering website built with Hugo",
+  "scripts": {
+    "dev": "hugo server -D",
+    "build": "hugo --gc --minify",
+    "clean": "rm -rf public resources",
+    "deploy": "gh-pages -d public"
+  },
+  "keywords": [
+    "hugo",
+    "blog",
+    "personal-website",
+    "github-pages"
+  ],
+  "author": "Marco",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {}
+}
