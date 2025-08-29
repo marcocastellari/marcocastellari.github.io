@@ -1,6 +1,6 @@
 ---
 title: "Hi, I'm Marco"
-date: 2024-01-01
+date: 2025-08-29
 draft: false
 # description: "Learn more about Marco - Electronic Engineer and Software Enthusiast"
 description: Welcome to my personal corner of the internet. I'm a passionate Electonic Engineer with a genuine interest in what I am working on and in cutting-edge technologies.
