@@ -1,6 +1,6 @@
 baseURL: 'https://yourusername.github.io'
 languageCode: en-us
-title: "Marco's Engineering Blog"
+title: "Marco Castellari"
 theme: PaperMod
 
 # Enable Git info for last modified dates
@@ -74,16 +74,16 @@ services:
 # Site parameters
 params:
   env: production
-  title: "Marco's Engineering Blog"
-  description: "Software Engineer & Technology Enthusiast"
-  keywords: [Software Engineering, Programming, Technology, Blog]
+  title: "Marco's Blog"
+  description: "Electronic Engineer & Software Enthusiast"
+  keywords: [Electronc Engineer, Software Engineering, Programming, Technology, Blog]
   author: Marco
   
   # Profile settings
   profileMode:
     enabled: true
-    title: "Hi, I'm Marco 👋"
-    subtitle: "Software Engineer & Technology Enthusiast"
+    title: "Hi, I'm Marco!"
+    subtitle: "Electronic Engineer & Sofwtare Enthusiast"
     imageUrl: "images/profile-picture.png"
     imageWidth: 150
     imageHeight: 150
@@ -94,13 +94,13 @@ params:
       - name: Projects
         url: /projects
       - name: Resume
-        url: /files/resume.pdf
+        url: /files/cv_Marco_Castellari.pdf
 
   # Home page settings
   homeInfoParams:
     Title: "Welcome to my corner of the internet"
     Content: >
-      I'm a passionate software engineer who loves building innovative solutions 
+      I'm a passionate electronic engineer who loves building innovative solutions 
       and sharing knowledge through writing. Explore my projects, read my thoughts 
       on technology, and feel free to connect!
 
@@ -157,7 +157,7 @@ params:
 
   # Edit post settings
   editPost:
-    URL: "https://github.com/yourusername/yourusername.github.io/tree/main/content"
+    URL: "https://github.com/marcocastellari/marcocastellari.github.io/tree/main/content"
     Text: "Suggest Changes"
     appendFilePath: true
 
@@ -184,10 +184,10 @@ menu:
       name: Search
       url: /search/
       weight: 50
-    - identifier: tags
-      name: Tags
-      url: /tags/
-      weight: 60
+    # - identifier: tags
+    #   name: Tags
+    #   url: /tags/
+    #   weight: 60
 
 # Output formats
 outputs:

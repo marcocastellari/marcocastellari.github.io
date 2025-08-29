@@ -1,4 +1,3 @@
-version: '3.8'
 name: docker-hugo
 services:
   hugo:
@@ -15,6 +14,7 @@ services:
       - HUGO_REFRESH_TIME=1
       - HUGO_THEME=PaperMod
       - HUGO_BASEURL=http://localhost:1313/
-    command: hugo server --bind 0.0.0.0 --buildDrafts --buildFuture --disableFastRender
+    command: hugo server --bind 0.0.0.0 --buildFuture --disableFastRender
+    # command: hugo server --bind 0.0.0.0 --buildDrafts --buildFuture --disableFastRender
     stdin_open: true
     tty: true

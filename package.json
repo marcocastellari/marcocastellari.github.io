@@ -1,7 +1,7 @@
 {
   "name": "hugo-personal-website",
   "version": "1.0.0",
-  "description": "Personal engineering website built with Hugo",
+  "description": "Personal website built with Hugo",
   "scripts": {
     "dev": "hugo server -D",
     "build": "hugo --gc --minify",
