@@ -1,0 +1,513 @@
+{{ if or (.Page.Content | findRE "```mermaid") (.Page.RawContent | findRE "```mermaid") }}
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<style>
+  .mermaid-container {
+    position: relative;
+    margin: 20px 0;
+  }
+  .mermaid-container.normal-mode {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #ffffff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: visible;
+    padding: 15px;
+  }
+  .mermaid-container.normal-mode:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    border-color: #007acc;
+  }
+  .mermaid-container.zoom-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(255,255,255,0.98);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(3px);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .mermaid-container.zoom-mode.closing {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .mermaid-controls {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    z-index: 1010;
+    display: none;
+    gap: 5px;
+  }
+  .zoom-mode .mermaid-controls {
+    display: flex;
+  }
+  .mermaid-controls button {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .mermaid-controls button:hover {
+    background: white;
+    border-color: #007acc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+  .mermaid-controls button.close-btn {
+    background: rgba(244, 67, 54, 0.9);
+    color: white;
+    border-color: #d32f2f;
+  }
+  .mermaid-controls button.close-btn:hover {
+    background: #f44336;
+    border-color: #c62828;
+  }
+  .mermaid-wrapper {
+    position: relative;
+  }
+  .normal-mode .mermaid-wrapper {
+    overflow: visible;
+    width: 100%;
+    height: auto;
+    background: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+  }
+  .zoom-mode .mermaid-wrapper {
+    overflow: hidden;
+    width: 90vw;
+    height: 90vh;
+    background: #ffffff;
+    border-radius: 12px;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+  }
+  .mermaid {
+    transform-origin: center center;
+    background: #ffffff !important;
+  }
+  .mermaid svg {
+    background: #ffffff !important;
+    max-width: 100%;
+    height: auto;
+  }
+  /* Ensure arrows and lines are visible */
+  .mermaid .edgePath path {
+    stroke: #333333 !important;
+    stroke-width: 2px !important;
+  }
+  .mermaid .arrowheadPath {
+    fill: #333333 !important;
+    stroke: #333333 !important;
+  }
+  .mermaid .edgeLabel {
+    background-color: #ffffff !important;
+    color: #333333 !important;
+  }
+  .zoom-hint {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: linear-gradient(135deg, rgba(0,123,204,0.9), rgba(0,95,158,0.9));
+    color: white;
+    padding: 8px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    z-index: 100;
+    white-space: nowrap;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+  }
+  .mermaid-container.normal-mode:hover .zoom-hint {
+    opacity: 1;
+    transform: translateY(0);
+  }
+</style>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      themeVariables: {
+        primaryColor: '#e1f5fe',
+        primaryTextColor: '#01579b',
+        primaryBorderColor: '#01579b',
+        lineColor: '#333333',
+        secondaryColor: '#f3e5f5',
+        tertiaryColor: '#ffffff',
+        background: '#ffffff',
+        mainBkg: '#ffffff',
+        secondaryBkg: '#f9f9f9',
+        tertiaryBkg: '#ffffff'
+      },
+      flowchart: {
+        useMaxWidth: true
+      },
+      sequence: {
+        useMaxWidth: true
+      },
+      gantt: {
+        useMaxWidth: true
+      },
+      journey: {
+        useMaxWidth: true
+      },
+      timeline: {
+        useMaxWidth: true
+      }
+    });
+
+    // Find and enhance existing mermaid diagrams
+    console.log('Looking for mermaid diagrams...');
+    const mermaidElements = document.querySelectorAll('.mermaid');
+    console.log('Found mermaid elements:', mermaidElements.length);
+
+    mermaidElements.forEach(function(element, index) {
+      console.log('Processing mermaid element', index + 1, element);
+      const graphDefinition = element.textContent;
+      const graphId = 'mermaid-' + Math.random().toString(36).substr(2, 9);
+      console.log('Created graphId:', graphId);
+
+      // Create container structure
+      const container = document.createElement('div');
+      container.className = 'mermaid-container normal-mode';
+      container.id = graphId + '-container';
+      console.log('Created container with id:', container.id);
+
+      const zoomHint = document.createElement('div');
+      zoomHint.className = 'zoom-hint';
+      zoomHint.innerHTML = '🔍 Click to zoom';
+
+      const controls = document.createElement('div');
+      controls.className = 'mermaid-controls';
+
+      const zoomInBtn = document.createElement('button');
+      zoomInBtn.innerHTML = '🔍+';
+      zoomInBtn.title = 'Zoom In';
+      zoomInBtn.addEventListener('click', () => zoomIn(graphId));
+
+      const zoomOutBtn = document.createElement('button');
+      zoomOutBtn.innerHTML = '🔍-';
+      zoomOutBtn.title = 'Zoom Out';
+      zoomOutBtn.addEventListener('click', () => zoomOut(graphId));
+
+      const resetBtn = document.createElement('button');
+      resetBtn.innerHTML = '⌂ Reset';
+      resetBtn.title = 'Reset View';
+      resetBtn.addEventListener('click', () => resetZoom(graphId));
+
+      const closeBtn = document.createElement('button');
+      closeBtn.innerHTML = '✕ Close';
+      closeBtn.title = 'Close';
+      closeBtn.className = 'close-btn';
+      closeBtn.addEventListener('click', (e) => {
+        console.log('Close button clicked for:', graphId);
+        e.stopPropagation();
+        exitZoom(graphId);
+      });
+
+      controls.appendChild(zoomInBtn);
+      controls.appendChild(zoomOutBtn);
+      controls.appendChild(resetBtn);
+      controls.appendChild(closeBtn);
+
+      const wrapper = document.createElement('div');
+      wrapper.className = 'mermaid-wrapper';
+      wrapper.id = graphId + '-wrapper';
+
+      // Preserve the original position by replacing in place
+      element.id = graphId;
+      const parentNode = element.parentNode;
+      const nextSibling = element.nextSibling;
+
+      // Build the container structure
+      container.appendChild(zoomHint);
+      container.appendChild(controls);
+      container.appendChild(wrapper);
+      wrapper.appendChild(element);
+
+      // Insert the container at the exact same position as the original element
+      if (nextSibling) {
+        parentNode.insertBefore(container, nextSibling);
+      } else {
+        parentNode.appendChild(container);
+      }
+
+      // Add click handler for entering zoom mode
+      container.addEventListener('click', function(e) {
+        console.log('Container clicked!', graphId);
+        if (container.classList.contains('normal-mode')) {
+          console.log('Entering zoom mode for:', graphId);
+          enterZoomMode(graphId);
+          e.stopPropagation();
+        } else {
+          console.log('Container not in normal mode, current classes:', container.className);
+        }
+      });
+
+      // Store references
+      window['container_' + graphId] = container;
+      window['wrapper_' + graphId] = wrapper;
+      window['graph_' + graphId] = element;
+    });
+
+    // Zoom mode functions
+    window.enterZoomMode = function(graphId) {
+      const container = window['container_' + graphId];
+      const graphDiv = window['graph_' + graphId];
+      const wrapper = window['wrapper_' + graphId];
+
+      container.classList.remove('normal-mode');
+      container.classList.add('zoom-mode');
+      document.body.style.overflow = 'hidden';
+
+      // Initialize custom zoom/pan functionality
+      setTimeout(() => {
+        console.log('Initializing zoom for:', graphId);
+
+        let scale = 1;
+        let translateX = 0;
+        let translateY = 0;
+        let isDragging = false;
+        let startX = 0;
+        let startY = 0;
+        let lastX = 0;
+        let lastY = 0;
+
+        const updateTransform = () => {
+          graphDiv.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+          console.log(`Transform updated: scale=${scale}, x=${translateX}, y=${translateY}`);
+        };
+
+        // Mouse wheel zoom
+        const handleWheel = (e) => {
+          e.preventDefault();
+          console.log('Wheel event:', e.deltaY);
+
+          const rect = wrapper.getBoundingClientRect();
+          const mouseX = e.clientX - rect.left;
+          const mouseY = e.clientY - rect.top;
+
+          const delta = e.deltaY > 0 ? 0.9 : 1.1;
+          const newScale = Math.max(0.3, Math.min(3, scale * delta));
+
+          if (newScale !== scale) {
+            const scaleDiff = newScale - scale;
+            translateX -= (mouseX - translateX) * (scaleDiff / scale);
+            translateY -= (mouseY - translateY) * (scaleDiff / scale);
+            scale = newScale;
+            updateTransform();
+          }
+        };
+
+        // Mouse drag pan
+        const handleMouseDown = (e) => {
+          console.log('Mouse down');
+          isDragging = true;
+          startX = e.clientX;
+          startY = e.clientY;
+          lastX = translateX;
+          lastY = translateY;
+          wrapper.style.cursor = 'grabbing';
+          e.preventDefault();
+        };
+
+        const handleMouseMove = (e) => {
+          if (isDragging) {
+            const deltaX = e.clientX - startX;
+            const deltaY = e.clientY - startY;
+            translateX = lastX + deltaX;
+            translateY = lastY + deltaY;
+            updateTransform();
+          }
+        };
+
+        const handleMouseUp = () => {
+          if (isDragging) {
+            console.log('Mouse up');
+            isDragging = false;
+            wrapper.style.cursor = 'grab';
+          }
+        };
+
+        // Touch support for mobile
+        const handleTouchStart = (e) => {
+          if (e.touches.length === 1) {
+            const touch = e.touches[0];
+            isDragging = true;
+            startX = touch.clientX;
+            startY = touch.clientY;
+            lastX = translateX;
+            lastY = translateY;
+            e.preventDefault();
+          }
+        };
+
+        const handleTouchMove = (e) => {
+          if (isDragging && e.touches.length === 1) {
+            const touch = e.touches[0];
+            const deltaX = touch.clientX - startX;
+            const deltaY = touch.clientY - startY;
+            translateX = lastX + deltaX;
+            translateY = lastY + deltaY;
+            updateTransform();
+            e.preventDefault();
+          }
+        };
+
+        const handleTouchEnd = () => {
+          isDragging = false;
+        };
+
+        // Add event listeners
+        wrapper.addEventListener('wheel', handleWheel, { passive: false });
+        wrapper.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+        wrapper.addEventListener('touchstart', handleTouchStart, { passive: false });
+        wrapper.addEventListener('touchmove', handleTouchMove, { passive: false });
+        wrapper.addEventListener('touchend', handleTouchEnd);
+
+        wrapper.style.cursor = 'grab';
+
+        // Store functions for button controls
+        window['zoom_' + graphId] = {
+          zoomIn: () => {
+            scale = Math.min(3, scale * 1.2);
+            updateTransform();
+          },
+          zoomOut: () => {
+            scale = Math.max(0.3, scale * 0.8);
+            updateTransform();
+          },
+          reset: () => {
+            scale = 1;
+            translateX = 0;
+            translateY = 0;
+            updateTransform();
+          },
+          cleanup: () => {
+            wrapper.removeEventListener('wheel', handleWheel);
+            wrapper.removeEventListener('mousedown', handleMouseDown);
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+            wrapper.removeEventListener('touchstart', handleTouchStart);
+            wrapper.removeEventListener('touchmove', handleTouchMove);
+            wrapper.removeEventListener('touchend', handleTouchEnd);
+          }
+        };
+
+        console.log('Zoom initialized successfully for:', graphId);
+      }, 200);
+    };
+
+    window.exitZoom = function(graphId) {
+      const container = window['container_' + graphId];
+      const zoom = window['zoom_' + graphId];
+
+      console.log('Exiting zoom mode for:', graphId);
+      console.log('Container found:', !!container);
+      console.log('Container classes before:', container ? container.className : 'N/A');
+
+      if (!container) {
+        console.error('Container not found for graphId:', graphId);
+        return;
+      }
+
+      // Reset zoom and position first
+      if (zoom && zoom.reset) {
+        zoom.reset();
+        console.log('Auto-reset applied for:', graphId);
+      }
+
+      // Start closing animation
+      container.classList.add('closing');
+      console.log('Added closing class');
+
+      // Complete the exit after animation
+      setTimeout(() => {
+        // Clean up event listeners
+        if (zoom && zoom.cleanup) {
+          zoom.cleanup();
+          delete window['zoom_' + graphId];
+          console.log('Zoom cleanup completed for:', graphId);
+        }
+
+        // Exit zoom mode completely
+        container.classList.remove('zoom-mode', 'closing');
+        container.classList.add('normal-mode');
+        document.body.style.overflow = '';
+
+        console.log('Container classes after:', container.className);
+        console.log('Body overflow reset to:', document.body.style.overflow);
+        console.log('Zoom mode exited successfully for:', graphId);
+      }, 300); // Match the CSS transition duration
+    };
+
+    // Global zoom control functions
+    window.zoomIn = function(graphId) {
+      const zoom = window['zoom_' + graphId];
+      if (zoom && zoom.zoomIn) {
+        console.log('Zoom in:', graphId);
+        zoom.zoomIn();
+      }
+    };
+
+    window.zoomOut = function(graphId) {
+      const zoom = window['zoom_' + graphId];
+      if (zoom && zoom.zoomOut) {
+        console.log('Zoom out:', graphId);
+        zoom.zoomOut();
+      }
+    };
+
+    window.resetZoom = function(graphId) {
+      const zoom = window['zoom_' + graphId];
+      if (zoom && zoom.reset) {
+        console.log('Reset zoom:', graphId);
+        zoom.reset();
+      }
+    };
+
+    // Close zoom mode when clicking outside or pressing ESC
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        const zoomModeContainer = document.querySelector('.mermaid-container.zoom-mode');
+        if (zoomModeContainer) {
+          const graphId = zoomModeContainer.id.replace('-container', '');
+          exitZoom(graphId);
+        }
+      }
+    });
+
+    document.addEventListener('click', function(e) {
+      // Check if click is on zoom-mode container background (not on diagram or controls)
+      if (e.target.classList.contains('zoom-mode')) {
+        const graphId = e.target.id.replace('-container', '');
+        console.log('Clicked outside diagram, closing zoom for:', graphId);
+        exitZoom(graphId);
+      }
+    });
+  });
+</script>
+{{ end }}

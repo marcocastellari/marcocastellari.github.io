@@ -4,11 +4,11 @@ FROM hugomods/hugo:exts
 # Set working directory
 WORKDIR /src
 
-# Fix Git ownership issue
-RUN git config --global --add safe.directory /src
-
 # Copy package files
 COPY . /src
+
+# Fix Git ownership issue after copying files
+RUN git config --global --add safe.directory /src
 
 # Expose port
 EXPOSE 1313

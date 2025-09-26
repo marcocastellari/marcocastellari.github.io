@@ -1,0 +1,138 @@
+{{ define "main" }}
+  <article class="post-single">
+    <header class="post-header">
+      <h1 class="post-title">{{ .Title }}</h1>
+      {{ if .Content }}
+      <div class="post-description">
+        {{ .Content }}
+      </div>
+      {{ end }}
+    </header>
+
+    <div class="post-content">
+      {{ $projects := where .Site.RegularPages "Section" "projects" }}
+      {{ $projects := where $projects "Draft" false }}
+
+      {{ if $projects }}
+        {{ $topics := .Site.Taxonomies.topics }}
+        {{ if $topics }}
+          {{ range $topic, $pages := $topics }}
+            {{ $projectPages := where $pages.Pages "Section" "projects" }}
+            {{ $projectPages := where $projectPages "Draft" false }}
+            {{ if $projectPages }}
+            <section class="project-topic">
+              <h2>{{ $topic | title }}</h2>
+              <div class="project-grid">
+                {{ range $projectPages }}
+                <div class="project-card">
+                  <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+                  <p>{{ .Params.description }}</p>
+                  {{ with .Params.status }}
+                  <div class="project-meta">
+                    <span class="status status-{{ . }}">{{ . | title }}</span>
+                  </div>
+                  {{ end }}
+                  {{ with .Params.tech_stack }}
+                  <div class="tech-stack">
+                    {{ range . }}
+                    <span class="tech-tag">{{ . }}</span>
+                    {{ end }}
+                  </div>
+                  {{ end }}
+                </div>
+                {{ end }}
+              </div>
+            </section>
+            {{ end }}
+          {{ end }}
+        {{ else }}
+          <!-- Fallback: show all projects without grouping -->
+          <div class="project-grid">
+            {{ range $projects }}
+            <div class="project-card">
+              <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+              <p>{{ .Params.description }}</p>
+            </div>
+            {{ end }}
+          </div>
+        {{ end }}
+      {{ else }}
+        <p>No projects found.</p>
+      {{ end }}
+    </div>
+  </article>
+
+  <style>
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    background: var(--entry);
+    transition: transform 0.2s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  .project-topic {
+    margin-bottom: 3rem;
+  }
+
+  .project-topic h2 {
+    color: var(--primary);
+    border-bottom: 2px solid var(--primary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-meta {
+    margin-top: 1rem;
+  }
+
+  .status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+
+  .status-completed {
+    background: rgba(34, 197, 94, 0.1);
+    color: #059669;
+  }
+
+  .status-in-progress {
+    background: rgba(251, 191, 36, 0.1);
+    color: #d97706;
+  }
+
+  .status-planned {
+    background: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+  }
+
+  .tech-stack {
+    margin-top: 0.5rem;
+  }
+
+  .tech-tag {
+    background: var(--code-bg);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+    display: inline-block;
+  }
+  </style>
+  {{ end }}

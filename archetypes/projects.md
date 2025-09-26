@@ -2,6 +2,8 @@
 title: "{{ replace .Name "-" " " | title }}"
 date: {{ .Date }}
 draft: true
+topics: [""]
+# subtopics: [""]
 description: ""
 tags: []
 categories: ["projects"]

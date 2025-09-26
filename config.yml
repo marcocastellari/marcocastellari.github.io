@@ -4,7 +4,7 @@ title: "Marco Castellari"
 theme: PaperMod
 
 # Enable Git info for last modified dates
-enableGitInfo: true
+enableGitInfo: false
 
 # Enable emoji support
 enableEmoji: true
@@ -37,6 +37,8 @@ taxonomies:
   category: categories
   tag: tags
   series: series
+  topic: topics
+  # subtopic: subtopics
 
 # Markup settings
 markup:
@@ -83,7 +85,7 @@ params:
   profileMode:
     enabled: true
     title: "Hi, I'm Marco!"
-    subtitle: "Electronic Engineer & Sofwtare Enthusiast"
+    subtitle: "Electronic Engineer & Software Enthusiast"
     imageUrl: "images/profile-picture.png"
     imageWidth: 150
     imageHeight: 150
