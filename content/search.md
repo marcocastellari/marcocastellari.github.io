@@ -1,7 +1,7 @@
 ---
 title: "Search"
 layout: "search"
-placeholder: "Search posts, projects, and pages..."
+placeholder: "Search articles, projects, and pages..."
 summary: "search"
 searchHidden: true
 ---

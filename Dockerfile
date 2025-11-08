@@ -4,10 +4,7 @@ FROM hugomods/hugo:exts
 # Set working directory
 WORKDIR /src
 
-# Copy package files
-COPY . /src
-
-# Fix Git ownership issue after copying files
+# Fix Git ownership issue (for mounted volumes)
 RUN git config --global --add safe.directory /src
 
 # Expose port

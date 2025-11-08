@@ -170,8 +170,8 @@ Visit: http://localhost:1313
 ### Content Creation
 
 ```bash
-# Create new post
-hugo new posts/my-post.md
+# Create new article
+hugo new articles/my-post.md
 
 # Create new project
 hugo new projects/my-project.md
@@ -271,17 +271,6 @@ graph TB
     H[Content Creation] --> A
 ```
 
-## Key Features Implemented
-
-- Responsive design with dark/light mode toggle
-- Mermaid diagram support with interactive zoom/pan
-- Automated deployment pipeline
-
-This implementation provides a production-ready static site with modern development practices and automated deployment workflows.
-
-## Links & References
-
-- **[GitHub Repository](https://github.com/marcocastellari/marcocastellari.github.io)** - Source code and documentation
-- **[Live Demo](https://marcocastellari.github.io)** - Visit the live website
+## References
 - **[Hugo Documentation](https://gohugo.io/documentation/)** - Official Hugo docs
 - **[PaperMod Theme](https://github.com/adityatelange/hugo-PaperMod)** - Theme repository

@@ -29,10 +29,10 @@ hugo/
 │       └── deploy.yml          # GitHub Pages deployment
 ├── archetypes/
 │   ├── default.md
-│   ├── posts.md
+│   ├── articles.md
 │   └── projects.md
 ├── content/
-│   ├── posts/                  # Blog posts
+│   ├── articles/               # Articles
 │   ├── projects/               # Portfolio projects
 │   ├── about.md
 │   └── resume.md

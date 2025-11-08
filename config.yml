@@ -1,6 +1,7 @@
 baseURL: 'https://marcocastellari.github.io'
 languageCode: en-us
-title: "Marco Castellari"
+title: "BitsOfReason"
+author: "Marco Castellari"
 theme: PaperMod
 
 # Enable Git info for last modified dates
@@ -29,14 +30,14 @@ defaultContentLanguageInSubdir: false
 
 # Permalinks
 permalinks:
-  posts: "/posts/:year/:month/:title/"
+  articles: "/articles/:year/:month/:title/"
   projects: "/projects/:title/"
 
 # Taxonomies
 taxonomies:
   category: categories
   tag: tags
-  series: series
+  articles: articles
   topic: topics
   # subtopic: subtopics
 
@@ -78,25 +79,19 @@ params:
   env: production
   title: "Marco's Blog"
   description: "Electronic Engineer & Software Enthusiast"
-  keywords: [Electronc Engineer, Software Engineering, Programming, Technology, Blog]
-  author: Marco
-  
-  # Profile settings
+  keywords: [Electronc Engineer, Software Engineering, Programming, Technology, Articles]
+  author: Marco Castellari
+  mainSections: ["articles"]
+
+  # Logo configuration
+  label:
+    text: "BitsOfReason"
+    icon: /bit.png
+    iconHeight: 35
+
+  # Profile settings (disabled - now on About page)
   profileMode:
-    enabled: true
-    title: "Hi, I'm Marco!"
-    subtitle: "Electronic Engineer & Software Enthusiast"
-    imageUrl: "images/profile-picture.png"
-    imageWidth: 150
-    imageHeight: 150
-    imageTitle: Marco
-    buttons:
-      - name: About
-        url: /about
-      - name: Projects
-        url: /projects
-      - name: Resume
-        url: /files/cv_Marco_Castellari.pdf
+    enabled: false
 
   # Home page settings
   homeInfoParams:
@@ -131,7 +126,7 @@ params:
   defaultTheme: auto
   disableThemeToggle: false
   ShowReadingTime: true
-  ShowShareButtons: true
+  ShowShareButtons: false # avoid social network share buttons
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
@@ -178,9 +173,9 @@ menu:
       name: Projects
       url: /projects/
       weight: 30
-    - identifier: posts
-      name: Blog
-      url: /posts/
+    - identifier: articles
+      name: Articles
+      url: /articles/
       weight: 40
     - identifier: search
       name: Search

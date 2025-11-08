@@ -1,9 +1,8 @@
 ---
-title: "Hi, I'm Marco"
+title: "About Me"
 date: 2025-08-29
 draft: false
-# description: "Learn more about Marco - Electronic Engineer and Software Enthusiast"
-description: Welcome to my personal corner of the internet. I'm a passionate Electonics and Telecommunications Engineer with a genuine interest for software and firmware developement and cutting-edge technologies.
+description: Welcome to my personal corner of the internet. I'm a passionate Electronics and Telecommunications Engineer with a genuine interest for software and firmware development and cutting-edge technologies.
 hidemeta: true
 disableShare: true
 ShowWordCount: false
@@ -11,6 +10,11 @@ ShowReadingTime: false
 ShowBreadCrumbs: false
 ---
 
+## About Me
+
+Welcome to my personal corner of the internet! I'm a passionate Electronics and Telecommunications Engineer with a genuine interest in software and firmware development and cutting-edge technologies.
+
+I love building innovative solutions, exploring new technologies, and sharing knowledge through my projects and writings. Whether it's working on embedded systems, developing software applications, or diving into the latest tech trends, I'm always eager to learn and create.
 
 ## Let's Connect!
 

@@ -1,0 +1,147 @@
+{{- define "main" }}
+
+{{- /* Welcome Section */ -}}
+<header class="page-header" style="text-align: center; margin-bottom: 3rem;">
+  <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Bits of Code, Bytes of Insight</h1>
+  <p style="font-size: 1.2rem; color: var(--secondary); max-width: 800px; margin: 0 auto;">
+    Exploring technology through projects and writing. Discover my latest work in software development, electronics, and more.
+  </p>
+</header>
+
+{{- /* Latest Articles Section */ -}}
+{{- $articles := where site.RegularPages "Type" "articles" }}
+{{- $articles = where $articles "Params.hiddenInHomeList" "!=" "true" }}
+{{- $latestArticles := first 6 $articles }}
+
+{{- if gt (len $latestArticles) 0 }}
+<header class="page-header">
+  <h1>Latest Articles</h1>
+</header>
+
+<div class="home-grid">
+  {{- range $latestArticles }}
+  <article class="post-entry">
+    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">
+        {{- .Title }}
+        {{- if .Draft }}
+        <span class="entry-hint" title="Draft">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+            <path
+              d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+          </svg>
+        </span>
+        {{- end }}
+      </h2>
+    </header>
+    {{- if (ne (.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <footer class="entry-footer">
+      {{- partial "post_meta.html" . -}}
+    </footer>
+    {{- end }}
+    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+</div>
+
+{{- if gt (len $latestArticles) 6 }}
+<div style="text-align: center; margin: 2rem 0;">
+  <a href="/articles/" class="view-all-btn">
+    View All Articles →
+  </a>
+</div>
+{{- end }}
+{{- end }}
+
+{{- /* Latest Projects Section */ -}}
+{{- $projects := where site.RegularPages "Type" "projects" }}
+{{- $projects = where $projects "Params.hiddenInHomeList" "!=" "true" }}
+{{- $latestProjects := first 6 $projects }}
+
+{{- if gt (len $latestProjects) 0 }}
+<header class="page-header" style="margin-top: 3rem;">
+  <h1>Latest Projects</h1>
+</header>
+
+<div class="home-grid">
+  {{- range $latestProjects }}
+  <article class="post-entry">
+    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
+    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
+    <header class="entry-header">
+      <h2 class="entry-hint-parent">
+        {{- .Title }}
+        {{- if .Draft }}
+        <span class="entry-hint" title="Draft">
+          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
+            <path
+              d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+          </svg>
+        </span>
+        {{- end }}
+      </h2>
+    </header>
+    {{- if (ne (.Param "hideSummary") true) }}
+    <div class="entry-content">
+      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+    </div>
+    {{- end }}
+    {{- if not (.Param "hideMeta") }}
+    <footer class="entry-footer">
+      {{- partial "post_meta.html" . -}}
+    </footer>
+    {{- end }}
+    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+  </article>
+  {{- end }}
+</div>
+
+{{- if gt (len $projects) 6 }}
+<div style="text-align: center; margin: 2rem 0;">
+  <a href="/projects/" class="view-all-btn">
+    View All Projects →
+  </a>
+</div>
+{{- end }}
+{{- end }}
+
+{{- /* Styling */ -}}
+<style>
+  .home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .view-all-btn {
+    padding: 0.5rem 1.5rem;
+    background: var(--theme);
+    color: var(--primary);
+    border-radius: 4px;
+    text-decoration: none;
+    display: inline-block;
+    border: 1px solid var(--border);
+    transition: all 0.2s ease;
+  }
+
+  .view-all-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+
+  @media (max-width: 768px) {
+    .home-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+{{- end }}{{- /* end main */ -}}

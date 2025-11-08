@@ -1,7 +1,8 @@
-name: docker-hugo
+name: docker-website
 services:
   hugo:
     container_name: hugo-dev
+    image: hugo-dev:latest
     build: .
     ports:
       - "1313:1313"
