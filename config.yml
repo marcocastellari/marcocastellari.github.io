@@ -37,7 +37,6 @@ permalinks:
 taxonomies:
   category: categories
   tag: tags
-  articles: articles
   topic: topics
   # subtopic: subtopics
 
@@ -80,13 +79,13 @@ params:
   title: "Marco's Blog"
   description: "Electronic Engineer & Software Enthusiast"
   keywords: [Electronc Engineer, Software Engineering, Programming, Technology, Articles]
-  author: Marco Castellari
+  author: BitsOfReason. All rights reserved.
   mainSections: ["articles"]
 
   # Logo configuration
   label:
     text: "BitsOfReason"
-    icon: /bit.png
+    icon: /BitsOfReason_logo.png
     iconHeight: 35
 
   # Profile settings (disabled - now on About page)

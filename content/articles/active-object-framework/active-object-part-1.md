@@ -1,13 +1,12 @@
 ---
-title: "Active Objects: A Modern View of Real-Time Concurrency"
+title: "Active Objects: A Modern View of Real-Time Concurrency - Part 1"
 subtitle: "The first article in a series exploring how real-time frameworks simplify concurrency and event-driven design through the Active Object pattern."
 date: 2025-08-30
 draft: false
 topics: ["Software Development"]
-# subtopics: ["Software Development.High Performance Computing"]
-description: ""
+description: "Learn how Active Objects provide a structured approach to real-time concurrency by combining threads, event queues, and state machines into isolated components."
 tags: []
-categories: ["projects"]
+categories: ["articles"]
 author: "Marco Castellari"
 showToc: true
 TocOpen: false

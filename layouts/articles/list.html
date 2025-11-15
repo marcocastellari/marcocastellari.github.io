@@ -3,7 +3,7 @@
 {{- if not .IsHome | and .Title }}
 <header class="page-header">
   {{- partial "breadcrumbs.html" . }}
-  <h1>Articles</h1>
+  <h1>{{ .Title }}</h1>
   {{- if .Description }}
   <div class="post-description">
     {{ .Description | markdownify }}
@@ -20,82 +20,134 @@
 </div>
 {{- end }}
 
-{{- $pages := union .RegularPages .Sections }}
+{{- /* Get all article series (subsections) */ -}}
+{{- $sections := .Sections }}
 
-{{- if .IsHome }}
-{{- $pages = where site.RegularPages "Type" "in" site.Params.mainSections }}
-{{- $pages = where $pages "Params.hiddenInHomeList" "!=" "true"  }}
-{{- end }}
+{{- /* Display series as expandable cards */ -}}
+<div class="series-container">
+  {{- range $sections }}
+  {{- $seriesName := .Title }}
+  {{- $articles := .RegularPages }}
 
-{{- $paginator := .Paginate $pages }}
-
-{{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
-{{- partial "home_info.html" . }}
-{{- end }}
-
-{{- $term := .Data.Term }}
-{{- range $index, $page := $paginator.Pages }}
-
-{{- $class := "post-entry" }}
-
-{{- $user_preferred := or site.Params.disableSpecial1stPost site.Params.homeInfoParams }}
-{{- if (and $.IsHome (eq $paginator.PageNumber 1) (eq $index 0) (not $user_preferred)) }}
-{{- $class = "first-entry" }}
-{{- else if $term }}
-{{- $class = "post-entry tag-entry" }}
-{{- end }}
-
-<article class="{{ $class }}">
-  {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-  {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-      {{- .Title }}
-      {{- if .Draft }}
-      <span class="entry-hint" title="Draft">
-        <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-          <path
-            d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
+  <div class="series-card" data-series="{{ $seriesName | urlize }}">
+    <div class="series-card-header">
+      <div class="series-main-content">
+        <div class="series-icon">
+          <!-- {{- if eq $seriesName "Active Object Framework" }}🔄
+          {{- else if eq $seriesName "General" }}✨
+          {{- else }}📖{{ end }} -->
+        </div>
+        <div class="series-info">
+          <h2 class="series-name">{{ $seriesName }}</h2>
+          <p class="series-subtitle">
+            {{- if .Description }}
+            {{ .Description }}
+            {{- else if eq $seriesName "Active Object Framework" }}
+            A comprehensive series exploring the Active Object pattern for real-time concurrent systems
+            {{- else if eq $seriesName "General" }}
+            Standalone articles on various topics in software development and engineering
+            {{- else }}
+            Articles in the {{ $seriesName }} series
+            {{- end }}
+          </p>
+          <div class="series-meta">
+            <span class="article-count">{{ len $articles }} article{{ if gt (len $articles) 1 }}s{{ end }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="series-toggle">
+        <svg class="chevron" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
         </svg>
-      </span>
-      {{- end }}
-    </h2>
-  </header>
-  {{- if (ne (.Param "hideSummary") true) }}
-  <div class="entry-content">
-    <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
+      </div>
+    </div>
+
+    <div class="series-articles">
+      <div class="articles-list">
+        {{- range $articles }}
+        <a href="{{ .Permalink }}" class="article-list-item">
+          <div class="article-number">
+            {{- if .Params.subtitle }}
+            <span class="bullet">•</span>
+            {{- else }}
+            <span class="bullet">→</span>
+            {{- end }}
+          </div>
+          <div class="article-content">
+            <h3 class="article-title">
+              {{ .Title }}
+              {{- if .Draft }}
+              <span class="draft-badge">Draft</span>
+              {{- end }}
+            </h3>
+            {{- if .Params.subtitle }}
+            <p class="article-subtitle">{{ .Params.subtitle }}</p>
+            {{- end }}
+            {{- if .Description }}
+            <p class="article-description">{{ .Description }}</p>
+            {{- end }}
+            <div class="article-meta">
+              {{- if .Date }}
+              <span class="article-date">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                  <line x1="16" y1="2" x2="16" y2="6"></line>
+                  <line x1="8" y1="2" x2="8" y2="6"></line>
+                  <line x1="3" y1="10" x2="21" y2="10"></line>
+                </svg>
+                {{ .Date.Format "Jan 2, 2006" }}
+              </span>
+              {{- end }}
+              {{- if .ReadingTime }}
+              <span class="article-reading-time">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <polyline points="12 6 12 12 16 14"></polyline>
+                </svg>
+                {{ .ReadingTime }} min read
+              </span>
+              {{- end }}
+            </div>
+          </div>
+          <div class="article-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </div>
+        </a>
+        {{- end }}
+      </div>
+    </div>
   </div>
   {{- end }}
-  {{- if not (.Param "hideMeta") }}
-  <footer class="entry-footer">
-    {{- partial "post_meta.html" . -}}
-  </footer>
-  {{- end }}
-  <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-</article>
-{{- end }}
+</div>
 
-{{- if gt $paginator.TotalPages 1 }}
-<footer class="page-footer">
-  <nav class="pagination">
-    {{- if $paginator.HasPrev }}
-    <a class="prev" href="{{ $paginator.Prev.URL | absURL }}">
-      «&nbsp;{{ i18n "prev_page" }}&nbsp;
-      {{- if (.Param "ShowPageNums") }}
-      {{- sub $paginator.PageNumber 1 }}/{{ $paginator.TotalPages }}
-      {{- end }}
-    </a>
-    {{- end }}
-    {{- if $paginator.HasNext }}
-    <a class="next" href="{{ $paginator.Next.URL | absURL }}">
-      {{- i18n "next_page" }}&nbsp;
-      {{- if (.Param "ShowPageNums") }}
-      {{- add 1 $paginator.PageNumber }}/{{ $paginator.TotalPages }}
-      {{- end }}&nbsp;»
-    </a>
-    {{- end }}
-  </nav>
-</footer>
-{{- end }}
+{{- /* JavaScript for accordion functionality */ -}}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const seriesCards = document.querySelectorAll('.series-card');
+
+  // Open the first series by default
+  if (seriesCards.length > 0) {
+    seriesCards[0].classList.add('expanded');
+  }
+
+  seriesCards.forEach(card => {
+    const header = card.querySelector('.series-card-header');
+
+    header.addEventListener('click', function() {
+      const isExpanded = card.classList.contains('expanded');
+
+      // Toggle this card
+      if (isExpanded) {
+        card.classList.remove('expanded');
+      } else {
+        card.classList.add('expanded');
+      }
+    });
+  });
+});
+</script>
 
 {{- end }}{{- /* end main */ -}}

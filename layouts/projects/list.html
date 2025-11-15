@@ -21,7 +21,8 @@
             {{ $projectPages := where $projectPages "Draft" false }}
             {{ if $projectPages }}
             <section class="project-topic">
-              <h2>{{ $topic | title }}</h2>
+              <!-- <h2>{{ $topic | title }}</h2> -->
+              <h2>{{ if eq $topic "ci/cd" }}CI/CD{{ else }}{{ $topic | title }}{{ end }}</h2>
               <div class="project-grid">
                 {{ range $projectPages }}
                 <div class="project-card">
