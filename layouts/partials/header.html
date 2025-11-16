@@ -97,6 +97,12 @@
             </div>
         </div>
         {{- $currentPage := . }}
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-label="Toggle menu">
+        <label for="menu-toggle" class="menu-icon" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
         <ul id="menu">
             {{- range site.Menus.main }}
             {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
