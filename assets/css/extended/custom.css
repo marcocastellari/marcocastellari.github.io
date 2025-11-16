@@ -38,6 +38,10 @@
    HEADER & NAVIGATION
    ============================================ */
 
+.logo {
+    order: 1;  /* Positions logo first */
+}
+
 .logo a {
     background: var(--gradient-primary);
     -webkit-background-clip: text;
@@ -53,7 +57,9 @@
 }
 
 #menu {
-    gap: 2px;
+    display: flex;
+    gap: 5px;
+    order: 3;  /* Positions menu last */
 }
 
 #menu a {
@@ -89,18 +95,13 @@
      THEME TOGGLE BUTTON - Right Aligned
      ============================================ */
 
-  /* Navigation layout - theme toggle after menu */
+  /* Navigation layout - flex container for proper ordering */
   .nav {
-      display: flex;
+      display: flex !important;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       gap: 1rem;
-  }
-
-  /* Menu spacing */
-  #menu {
-      display: flex;
-      gap: 5px;
+      flex-wrap: nowrap;
   }
 
   /* Remove background and square from theme toggle */
@@ -108,12 +109,14 @@
       background: transparent !important;
       border: none;
       padding: 0;
-      margin-left: 15px; /* Space between menu and theme toggle */
+      margin-left: 15px; /* Space between logo and theme toggle */
+      margin-right: 15px; /* Space between theme toggle and menu */
       cursor: pointer;
       display: flex;
       align-items: center;
       transition: all 0.3s ease;
       flex-shrink: 0; /* Prevent toggle from shrinking */
+      order: 2; /* Positions between logo (order: 1) and menu (order: 3) */
   }
 
   #theme-toggle:hover {
