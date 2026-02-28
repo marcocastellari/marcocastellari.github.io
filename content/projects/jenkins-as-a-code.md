@@ -34,7 +34,7 @@ params:
 # Building a Modern CI/CD Setup: Jenkins on Docker with Configuration as Code
 If you've ever set up a Jenkins server from scratch, you know the pain: clicking through endless configuration screens, manually installing plugins, setting up users and permissions, and then... hoping you never have to do it again. But what happens when you need to recreate your setup? Or when you want to share your configuration with your team? That's where **Jenkins Configuration as Code** (JCasC) comes in.
 
-In this post, I'll walk you through a fully containerized Jenkins infrastructure that leverages Docker Compose and JCasC to create a reproducible, version-controlled CI/CD environment. This isn't just theory—this is a battle-tested setup I use for building everything from traditional C/C++ applications to embedded STM32 firmware.
+In this post, I'll walk you through a fully containerized Jenkins infrastructure that leverages Docker Compose and JCasC to create a reproducible, version-controlled CI/CD environment. This isn't just theory—this is a battle-tested setup I use for building everything from traditional C/C++ applications to embedded STM32 firmware. The full setup is available at [github.com/marcocastellari/jenkins-casc](https://github.com/marcocastellari/jenkins-casc.git).
 
 ## Jenkins Configuration as Code (JCasC)
 The solution is treating your Jenkins setup like you treat your application code: **version controlled, reproducible, and automated**.
@@ -263,7 +263,13 @@ services:
 ```
 
 ## Launch Everything
-Run the command:
+Clone the repository first:
+```bash
+git clone https://github.com/marcocastellari/jenkins-casc.git
+cd jenkins-casc
+```
+
+Then run:
 ```bash
 docker-compose up -d
 ```
