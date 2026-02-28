@@ -42,7 +42,7 @@ The solution is treating your Jenkins setup like you treat your application code
 With Jenkins Configuration as Code, your entire Jenkins configuration lives in YAML files. Combined with Docker, you can spin up a complete, pre-configured Jenkins environment with a single command. No clicking, no manual steps, no "it works on my machine" syndrome.
 
 ## Architecture Overview
-The proposed setup consists of an orchestrator, that manage the pipeline, and various agents, where the build process happen. 
+The proposed setup consists of an orchestrator that manages the pipeline, and various agents where the build process happens.
 
 All components run in Docker containers and communicate over a dedicated bridge network. The agents automatically register themselves with the Jenkins server using the Swarm plugin—no manual node configuration needed.
 
@@ -160,7 +160,7 @@ The heart of the setup is the `jenkins-casc.yaml` file. This single file defines
                 password: "${GITHUB_PAT}"
     ```
 
-- pipeline job configuration. To create a new pipline simpy add it as a new `script` bullet
+- pipeline job configuration. To create a new pipeline simply add it as a new `script` bullet
 
     ```yaml
     # Pipeline Job Configuration - All pipelines reference Jenkinsfile from repositories
@@ -282,7 +282,7 @@ Open `http://localhost:8080` and log in with your configured credentials. You'll
 
 
 ## Customization and Extension
-The JCasC approach is really easy it is to customize:
+The JCasC approach makes it really easy to customize:
 
 - **Adding Plugins**
 
@@ -309,7 +309,7 @@ The JCasC approach is really easy it is to customize:
 
 
 ## Project Pipelines Example
-Create a dedicated `Jenkinsfile` foreach project to build and version it with the project
+Create a dedicated `Jenkinsfile` for each project to build and version it with the project
 
 - **Jenkins file for STM32 project**
 
@@ -363,7 +363,7 @@ Create a dedicated `Jenkinsfile` foreach project to build and version it with th
 ## Future Enhancements
 Some ideas I'm considering:
 
-- INtegrate tests in the pipeline
+- Integrate tests in the pipeline
 - Integrate with cloud storage for artifact archival
 - Implement automated backup of Jenkins volumes
 
@@ -375,4 +375,4 @@ In modern software development, your CI/CD infrastructure is just as important a
 - **Automated**: No manual steps means no human error
 - **Documented**: The code IS the documentation
 
-This Jenkins-on-Docker setup with Configuration as Code achieves all of these goals and make possible to treat your CI/CD infrastructure like any other piece of software: version-controlled, reproducible, and automated.
+This Jenkins-on-Docker setup with Configuration as Code achieves all of these goals and makes it possible to treat your CI/CD infrastructure like any other piece of software: version-controlled, reproducible, and automated.
