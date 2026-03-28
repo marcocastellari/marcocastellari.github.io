@@ -45,3 +45,5 @@ yarn-error.log*
 
 # Docker
 .dockerignore
+
+_not_versioned/**

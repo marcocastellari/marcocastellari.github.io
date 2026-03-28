@@ -17,6 +17,12 @@ To rebuild and refresh the container:
 ```bash
 docker-compose up --build
 ```
+
+To restart the container:
+```bash
+docker-compose restart hugo
+```
+
 ## Prerequisites
 1. Git
 2. Docker 
