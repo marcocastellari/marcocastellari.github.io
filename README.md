@@ -9,18 +9,18 @@ A simple yet powerful Hugo-based static website hosted on a public Github page.
 ## Quick Start
 Docker is used for Local Development
 ```bash
-docker-compose up -d
+docker compose up -d
 ```
 Visit: http://localhost:1313
 
 To rebuild and refresh the container:
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 To restart the container:
 ```bash
-docker-compose restart hugo
+docker compose restart hugo
 ```
 
 ## Prerequisites
