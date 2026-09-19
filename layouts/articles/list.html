@@ -1,3 +1,56 @@
 {{- define "main" }}
-  {{- partial "series-list.html" . }}
+
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- with .Description }}
+  <div class="post-description">{{ . | markdownify }}</div>
+  {{- end }}
+</header>
+
+{{- with .Content }}
+<div class="post-content">{{ . }}</div>
 {{- end }}
+
+{{- /* Series first, each in reading order; then everything else by date. */ -}}
+{{- $sectionPages := .Pages }}
+{{- $inSeries := slice }}
+
+{{- with site.GetPage "/series" }}
+  {{- range .Pages }}
+  {{- $inSeries = $inSeries | append .Pages }}
+  <section class="series-group">
+    <header class="series-group-header">
+      <h2 class="series-group-title">{{ .Title }}</h2>
+      <span class="series-count">{{ len .Pages }} part{{ if gt (len .Pages) 1 }}s{{ end }}</span>
+    </header>
+    <ol class="article-list article-list-numbered">
+      {{- range .Pages.ByWeight }}
+      {{- partial "article-row.html" . }}
+      {{- end }}
+    </ol>
+  </section>
+  {{- end }}
+{{- end }}
+
+{{- $standalone := $sectionPages }}
+{{- if gt (len $inSeries) 0 }}
+  {{- $standalone = complement $inSeries $sectionPages }}
+{{- end }}
+
+{{- with $standalone }}
+<section class="series-group">
+  {{- if gt (len $inSeries) 0 }}
+  <header class="series-group-header">
+    <h2 class="series-group-title">Other Articles</h2>
+  </header>
+  {{- end }}
+  <ul class="article-list">
+    {{- range .ByDate.Reverse }}
+    {{- partial "article-row.html" . }}
+    {{- end }}
+  </ul>
+</section>
+{{- end }}
+
+{{- end }}{{- /* end main */ -}}

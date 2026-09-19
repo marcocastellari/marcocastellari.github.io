@@ -1,4 +1,4 @@
 ---
-title: "Articles"
-description: "Technical articles and tutorials on software development, embedded systems, and engineering"
+title: "Writing"
+description: "Notes on embedded firmware, real-time concurrency, and the build tooling that ships them."
 ---

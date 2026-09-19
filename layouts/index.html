@@ -1,164 +1,39 @@
 {{- define "main" }}
 
-{{- /* Welcome Section */ -}}
-<header class="page-header" style="text-align: center; margin-bottom: 3rem;">
-  <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Bits of Code, Bytes of Insight</h1>
-  <p style="font-size: 1.2rem; color: var(--secondary); max-width: 800px; margin: 0 auto;">
-    Exploring technology through projects and writing. Discover my latest work in software development, electronics, and more.
-  </p>
-</header>
+{{- /* Hero — copy lives in content/_index.md, not in this template. */ -}}
+<section class="hero">
+  <h1 class="hero-name">{{ .Title | default site.Title }}</h1>
+  {{- with .Params.role }}<p class="hero-role">{{ . }}</p>{{ end }}
+  {{- with .Content }}<div class="hero-tagline">{{ . }}</div>{{ end }}
+  {{ partial "profile-links.html" (dict "cv" .Params.cv) }}
+</section>
 
-{{- /* Latest Articles Section */ -}}
-{{- $articles := where site.RegularPages "Type" "articles" }}
-{{- $articles = where $articles "Params.hiddenInHomeList" "!=" "true" }}
-{{- $latestArticles := first 6 $articles }}
-
-{{- if gt (len $latestArticles) 0 }}
-<header class="page-header">
-  <h1>Latest Articles</h1>
-</header>
-
-<div class="home-grid">
-  {{- range $latestArticles }}
-  <article class="post-entry">
-    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-    <header class="entry-header">
-      <h2 class="entry-hint-parent">
-        {{- .Title }}
-        {{- if .Draft }}
-        <span class="entry-hint" title="Draft">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-            <path
-              d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-          </svg>
-        </span>
-        {{- end }}
-      </h2>
-    </header>
-    {{- if (ne (.Param "hideSummary") true) }}
-    <div class="entry-content">
-      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
-    </div>
-    {{- end }}
-    {{- if not (.Param "hideMeta") }}
-    <footer class="entry-footer">
-      {{- partial "post_meta.html" . -}}
-    </footer>
-    {{- end }}
-    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-  </article>
-  {{- end }}
-</div>
-
-<div style="text-align: center; margin: 2rem 0;">
-  <a href="/articles/" class="view-all-btn">
-    View All Articles →
-  </a>
-</div>
-{{- end }}
-
-{{- /* Latest Projects Section */ -}}
+{{- /* Selected work */ -}}
 {{- $projects := where site.RegularPages "Type" "projects" }}
-{{- $projects = where $projects "Params.hiddenInHomeList" "!=" "true" }}
-{{- $latestProjects := first 6 $projects }}
-
-{{- if gt (len $latestProjects) 0 }}
-<header class="page-header" style="margin-top: 3rem;">
-  <h1>Latest Projects</h1>
-</header>
-
-<div class="home-grid">
-  {{- range $latestProjects }}
-  <article class="post-entry">
-    {{- $isHidden := (.Param "cover.hiddenInList") | default (.Param "cover.hidden") | default false }}
-    {{- partial "cover.html" (dict "cxt" . "IsSingle" false "isHidden" $isHidden) }}
-    <header class="entry-header">
-      <h2 class="entry-hint-parent">
-        {{- .Title }}
-        {{- if .Draft }}
-        <span class="entry-hint" title="Draft">
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" fill="currentColor">
-            <path
-              d="M160-410v-60h300v60H160Zm0-165v-60h470v60H160Zm0-165v-60h470v60H160Zm360 580v-123l221-220q9-9 20-13t22-4q12 0 23 4.5t20 13.5l37 37q9 9 13 20t4 22q0 11-4.5 22.5T862.09-380L643-160H520Zm300-263-37-37 37 37ZM580-220h38l121-122-18-19-19-18-122 121v38Zm141-141-19-18 37 37-18-19Z" />
-          </svg>
-        </span>
-        {{- end }}
-      </h2>
-    </header>
-    {{- if (ne (.Param "hideSummary") true) }}
-    <div class="entry-content">
-      <p>{{ .Summary | plainify | htmlUnescape }}{{ if .Truncated }}...{{ end }}</p>
-    </div>
-    {{- end }}
-    {{- if not (.Param "hideMeta") }}
-    <footer class="entry-footer">
-      {{- partial "post_meta.html" . -}}
-    </footer>
-    {{- end }}
-    <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-  </article>
-  {{- end }}
-</div>
-
-<div style="text-align: center; margin: 2rem 0;">
-  <a href="/projects/" class="view-all-btn">
-    View All Projects →
-  </a>
-</div>
+{{- with first 4 $projects }}
+<section class="home-section">
+  <header class="home-section-header">
+    <h2>Selected Work</h2>
+    <a href="{{ "projects/" | relURL }}">All projects &rarr;</a>
+  </header>
+  <div class="home-grid">
+    {{- range . }}{{ partial "entry-card.html" . }}{{ end }}
+  </div>
+</section>
 {{- end }}
 
-{{- /* Styling */ -}}
-<style>
-  .home-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.5rem;
-    margin: 2rem 0;
-  }
-
-  .view-all-btn {
-    padding: 0.875rem 2rem;
-    background: var(--gradient-primary);
-    color: white;
-    border-radius: 8px;
-    text-decoration: none;
-    display: inline-block;
-    border: none;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px var(--shadow-color);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .view-all-btn::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    transition: left 0.5s ease;
-  }
-
-  .view-all-btn:hover::before {
-    left: 100%;
-  }
-
-  .view-all-btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 6px 25px var(--shadow-color);
-    filter: brightness(1.1);
-  }
-
-  @media (max-width: 768px) {
-    .home-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
+{{- /* Recent writing */ -}}
+{{- $articles := where site.RegularPages "Type" "articles" }}
+{{- with first 4 $articles }}
+<section class="home-section">
+  <header class="home-section-header">
+    <h2>Recent Writing</h2>
+    <a href="{{ "articles/" | relURL }}">All writing &rarr;</a>
+  </header>
+  <div class="home-grid">
+    {{- range . }}{{ partial "entry-card.html" . }}{{ end }}
+  </div>
+</section>
+{{- end }}
 
 {{- end }}{{- /* end main */ -}}

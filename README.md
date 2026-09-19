@@ -7,6 +7,12 @@ A simple yet powerful Hugo-based static website hosted on a public Github page.
 - [GitHub Pages Docs](https://docs.github.com/en/pages)
 
 ## Quick Start
+
+Clone `hugo theme` as submodule
+```bash
+git submodule update --init --recursive
+```
+
 Docker is used for Local Development
 ```bash
 docker compose up -d

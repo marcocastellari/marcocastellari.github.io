@@ -3,36 +3,13 @@ title: "Active Objects: A Modern View of Real-Time Concurrency - Part 1"
 subtitle: "The first article in a series exploring how real-time frameworks simplify concurrency and event-driven design through the Active Object pattern."
 date: 2025-08-30
 draft: false
-topics: ["Software Development"]
 description: "Learn how Active Objects provide a structured approach to real-time concurrency by combining threads, event queues, and state machines into isolated components."
-tags: []
-categories: ["articles"]
-author: "Marco Castellari"
+tags: ["C++", "Concurrency", "Real-Time", "Embedded"]
+series: ["Active Object Framework"]
+weight: 1
 showToc: true
-TocOpen: false
-hidemeta: false
-comments: false
-disableShare: true
-hideSummary: false
-searchHidden: false
-ShowReadingTime: true
-ShowBreadCrumbs: true
-ShowPostNavLinks: true
-cover:
-    image: ""
-    alt: ""
-    caption: ""
-    relative: false
-    hidden: false
-params:
-    github: ""
-    demo: ""
-    tech_stack: []
-    status: "completed" # completed, in-progress, planned
-# editPost:
-#     URL: "https://github.com/yourusername/yourusername.github.io/tree/main/content"
-#     Text: "Suggest Changes"
-#     appendFilePath: true
+aliases:
+    - /articles/2025/08/active-objects-a-modern-view-of-real-time-concurrency-part-1/
 ---
 
 ## Introduction - Why Concurrency Still Hurts 
@@ -49,7 +26,7 @@ Each thread handles part of the system, but shared data introduces race conditio
 
 As systems grow, this leads to fragile designs and unpredictable timing - exactly what real-time software must avoid.
 
-# What is an Active Object?
+## What is an Active Object?
 
 The Active Object is a software component that combines its own thread of control with an event queue and a state machine.
 
@@ -97,11 +74,6 @@ graph TB
     E -->|flows through| ED
     E -->|queued & processed| AO1
     E -->|state transitions| FSM1
-    
-    class ED dispatcher
-    class AO1,AO2,AO3 activeObj
-    class FSM1 fsm
-    class E events
 ```
 
 ## How Active Objects Fit into a Real-Time Framework

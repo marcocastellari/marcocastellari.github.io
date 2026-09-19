@@ -3,35 +3,22 @@ title: "Building a Modern CI/CD Setup: Jenkins on Docker with Configuration as C
 subtitle: "How to automate your entire Jenkins configuration — from infrastructure to pipelines — using Docker and JCasC"
 date: 2026-02-19
 draft: false
-topics: ["Software Development"]
-description: "Managing Jenkins configuration manually is error-prone, hard to reproduce, and painful to scale. This article walks through a fully containerized Jenkins setup using Docker Compose and the Configuration as Code plugin — so your entire CI/CD infrastructure lives in version control and rebuilds from scratch with a single command"
-tags: []
-categories: ["projects"]
-author: "Marco Castellari"
+description: "Managing Jenkins configuration manually is error-prone, hard to reproduce, and painful to scale. A fully containerized Jenkins setup using Docker Compose and the Configuration as Code plugin — so the entire CI/CD infrastructure lives in version control and rebuilds from scratch with a single command."
+tags: ["Jenkins", "Docker", "CI-CD", "JCasC", "DevOps", "STM32"]
 showToc: true
-TocOpen: false
-hidemeta: false
-comments: false
-disableShare: true
-hideSummary: false
-searchHidden: false
-ShowReadingTime: true
-ShowBreadCrumbs: true
-ShowPostNavLinks: true
 cover:
-    image: ""
-    alt: ""
-    caption: ""
-    relative: false
-    hidden: false
+    image: "docker-jenkins.png"
+    alt: "Jenkins"
+    caption: "Jenkins"
+    relative: true
+aliases:
+    - /projects/building-a-modern-cicd-setup-jenkins-on-docker-with-configuration-as-code/
 params:
-    github: ""
-    demo: ""
-    tech_stack: []
+    github: "https://github.com/marcocastellari/jenkins-casc"
+    tech_stack: ["Jenkins", "JCasC", "Docker Compose", "Job DSL", "Groovy", "STM32 toolchain"]
     status: "in-progress"
 ---
 
-# Building a Modern CI/CD Setup: Jenkins on Docker with Configuration as Code
 If you've ever set up a Jenkins server from scratch, you know the pain: clicking through endless configuration screens, manually installing plugins, setting up users and permissions, and then... hoping you never have to do it again. But what happens when you need to recreate your setup? Or when you want to share your configuration with your team? That's where **Jenkins Configuration as Code** (JCasC) comes in.
 
 In this post, I'll walk you through a fully containerized Jenkins infrastructure that leverages Docker Compose and JCasC to create a reproducible, version-controlled CI/CD environment. This isn't just theory—this is a battle-tested setup I use for building everything from traditional C/C++ applications to embedded STM32 firmware. The full setup is available at [github.com/marcocastellari/jenkins-casc](https://github.com/marcocastellari/jenkins-casc.git).
@@ -106,58 +93,56 @@ The heart of the setup is the `jenkins-casc.yaml` file. This single file defines
 
     ```yaml
     jenkins:
-    systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin"
+      systemMessage: "Jenkins configured automatically by Jenkins Configuration as Code plugin"
 
-    # Security Realm for user authentication
-    securityRealm:
+      # Security Realm for user authentication
+      securityRealm:
         local:
-        allowsSignup: false
-        users:
+          allowsSignup: false
+          users:
             - id: "admin"
-            password: "${JENKINS_ADMIN_PASSWORD}"
-
+              password: "${JENKINS_ADMIN_PASSWORD}"
             - id: "developer"
-            password: "${JENKINS_DEVELOPER_PASSWORD}"
-
+              password: "${JENKINS_DEVELOPER_PASSWORD}"
             - id: "viewer"
-            password: "${JENKINS_VIEWER_PASSWORD}"
+              password: "${JENKINS_VIEWER_PASSWORD}"
 
-    # Authorization Strategy
-    authorizationStrategy:
+      # Authorization Strategy
+      authorizationStrategy:
         projectMatrix:
-        entries:
+          entries:
             - user:
                 name: admin
                 permissions:
-                - Overall/Administer
+                  - Overall/Administer
             - user:
                 name: developer
                 permissions:
-                - Overall/Read
-                - Job/Build
-                - Job/Create
-                - Job/Delete
-                - Job/Configure
-                - Job/Workspace
+                  - Overall/Read
+                  - Job/Build
+                  - Job/Create
+                  - Job/Delete
+                  - Job/Configure
+                  - Job/Workspace
             - user:
                 name: viewer
                 permissions:
-                - Overall/Read
+                  - Overall/Read
 
-    # Credentials Configuration
+    # Credentials Configuration (a top-level key, sibling to `jenkins`)
     credentials:
-    system:
+      system:
         domainCredentials:
-        - credentials:
-            - string:
-                id: "github-pat"
-                description: "GitHub Personal Access Token"
-                secret: "${GITHUB_PAT}"
-            - usernamePassword:
-                id: "github-user-pat"
-                description: "GitHub Username and PAT"
-                username: "${GITHUB_USERNAME}"
-                password: "${GITHUB_PAT}"
+          - credentials:
+              - string:
+                  id: "github-pat"
+                  description: "GitHub Personal Access Token"
+                  secret: "${GITHUB_PAT}"
+              - usernamePassword:
+                  id: "github-user-pat"
+                  description: "GitHub Username and PAT"
+                  username: "${GITHUB_USERNAME}"
+                  password: "${GITHUB_PAT}"
     ```
 
 - pipeline job configuration. To create a new pipeline simply add it as a new `script` bullet
@@ -235,18 +220,18 @@ services:
 
   # jenkins-server-agent-stm32
   agent-stm32:
-      build:
+    build:
       context: ./agent-stm32
       dockerfile: Dockerfile
-      container_name: agent-stm32
-      restart: unless-stopped
-      privileged: true
-      volumes:
+    container_name: agent-stm32
+    restart: unless-stopped
+    privileged: true
+    volumes:
       - agent_stm32_workspace:/home/jenkins/agent
       - /var/run/docker.sock:/var/run/docker.sock
-      networks:
+    networks:
       - jenkins-network
-      command: >
+    command: >
       -master http://server:8080
       -username admin
       -password ${JENKINS_ADMIN_PASSWORD}
@@ -255,11 +240,11 @@ services:
       -executors 2
       -fsroot /home/jenkins/agent
       -disableSslVerification
-      environment:
+    environment:
       - ARM_TOOLCHAIN_PATH=/opt/arm-toolchain/bin
-      depends_on:
+    depends_on:
       server:
-          condition: service_healthy
+        condition: service_healthy
 ```
 
 ## Launch Everything
@@ -382,3 +367,4 @@ In modern software development, your CI/CD infrastructure is just as important a
 - **Documented**: The code IS the documentation
 
 This Jenkins-on-Docker setup with Configuration as Code achieves all of these goals and makes it possible to treat your CI/CD infrastructure like any other piece of software: version-controlled, reproducible, and automated.
+{{< project-links >}}
