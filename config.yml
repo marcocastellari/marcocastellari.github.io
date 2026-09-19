@@ -1,6 +1,6 @@
 baseURL: 'https://marcocastellari.github.io'
 languageCode: en-us
-title: "BitsOfReason"
+title: "Marco Castellari"
 author: "Marco Castellari"
 theme: PaperMod
 
@@ -28,17 +28,14 @@ minify:
 defaultContentLanguage: en
 defaultContentLanguageInSubdir: false
 
-# Permalinks
-permalinks:
-  articles: "/articles/:year/:month/:title/"
-  projects: "/projects/:title/"
+# Permalinks intentionally left at Hugo's defaults: /<section>/<filename>/.
+# Dates in article URLs make evergreen technical writing look stale and break
+# when a post is revised.
 
 # Taxonomies
 taxonomies:
-  category: categories
   tag: tags
-  topic: topics
-  # subtopic: subtopics
+  series: series
 
 # Markup settings
 markup:
@@ -76,29 +73,21 @@ services:
 # Site parameters
 params:
   env: production
-  title: "Marco's Blog"
-  description: "Electronic Engineer & Software Enthusiast"
-  keywords: [Electronc Engineer, Software Engineering, Programming, Technology, Articles]
-  author: BitsOfReason. All rights reserved.
-  mainSections: ["articles"]
+  title: "Marco Castellari"
+  description: "Electronics & Software Engineer building systems from the board up - PCBs, real-time firmware, C++ applications, and CI tooling."
+  keywords: [Embedded Systems, Firmware, C++, PCB Design, CI/CD, Real-Time, Marco Castellari]
+  author: "Marco Castellari"
+  mainSections: ["articles", "projects"]
 
-  # Logo configuration
+  # Homepage hero copy lives in content/_index.md
+
+  # Header wordmark
   label:
-    text: "BitsOfReason"
-    icon: /BitsOfReason_logo.png
-    iconHeight: 35
+    text: "Marco Castellari"
 
-  # Profile settings (disabled - now on About page)
+  # Profile settings (disabled — the About page carries this)
   profileMode:
     enabled: false
-
-  # Home page settings
-  homeInfoParams:
-    Title: "Welcome to my corner of the internet"
-    Content: >
-      I'm a passionate electronic engineer who loves building innovative solutions 
-      and sharing knowledge through writing. Explore my projects, read my thoughts 
-      on technology, and feel free to connect!
 
   # Social icons
   socialIcons:
@@ -106,8 +95,6 @@ params:
       url: "https://github.com/marcocastellari"
     - name: linkedin
       url: "https://linkedin.com/in/marco-castellari01"
-    - name: email
-      url: "marco.castellari01@gmail.com"
     - name: rss
       url: "/index.xml"
 
@@ -144,7 +131,7 @@ params:
   analytics:
     google:
       SiteVerificationTag: ""
-  
+
   # Cover image settings
   cover:
     hidden: false
@@ -160,30 +147,22 @@ params:
 # Menu configuration
 menu:
   main:
-    - identifier: home
-      name: Home
-      url: /
-      weight: 10
-    - identifier: about
-      name: About
-      url: /about/
-      weight: 20
     - identifier: projects
       name: Projects
       url: /projects/
-      weight: 30
+      weight: 10
     - identifier: articles
-      name: Articles
+      name: Writing
       url: /articles/
-      weight: 40
+      weight: 20
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 30
     - identifier: search
       name: Search
       url: /search/
-      weight: 50
-    # - identifier: tags
-    #   name: Tags
-    #   url: /tags/
-    #   weight: 60
+      weight: 40
 
 # Output formats
 outputs:

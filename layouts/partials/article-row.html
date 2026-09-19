@@ -1,0 +1,14 @@
+{{- /* One row in a writing list. */ -}}
+<li class="article-row">
+  <a class="article-row-link" href="{{ .Permalink }}">
+    <h3 class="article-row-title">
+      {{ .Title }}
+      {{- if .Draft }}<span class="draft-badge">Draft</span>{{ end }}
+    </h3>
+    {{- with .Params.subtitle }}<p class="article-row-subtitle">{{ . }}</p>{{ end }}
+    <div class="article-row-meta">
+      <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+      {{- with .ReadingTime }}<span>{{ . }} min read</span>{{ end }}
+    </div>
+  </a>
+</li>

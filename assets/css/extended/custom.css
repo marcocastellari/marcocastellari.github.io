@@ -1,591 +1,476 @@
 /* ============================================
-   COLOR THEME FOR PAPERMOD
+   Extensions to PaperMod.
+
+   One accent colour, no gradients, no animations. Restraint is the point:
+   the code samples and diagrams are the content, everything here gets out
+   of their way.
    ============================================ */
 
 :root {
-    /* Main color palette */
-    --color-primary: #2563eb;
-    --color-secondary: #7c3aed;
-    --color-accent: #ec4899;
-    --color-success: #10b981;
-    --color-warning: #f59e0b;
-    --color-info: #06b6d4;
-
-    /* Gradient combinations */
-    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    --gradient-sunset: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    --gradient-ocean: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    --gradient-forest: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-    --gradient-fire: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    --gradient-sky: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
-
-    /* Light theme colors */
-    --bg-accent: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
-    --shadow-color: rgba(102, 126, 234, 0.2);
+    --accent: #2563eb;
+    --accent-hover: #1d4ed8;
+    --accent-soft: rgba(37, 99, 235, 0.08);
+    --radius: 4px;
+    --radius-lg: 8px;
 }
 
 .dark {
-    --color-primary: #60a5fa;
-    --color-secondary: #a78bfa;
-    --color-accent: #f472b6;
-    --color-success: #34d399;
-    --color-warning: #fbbf24;
-    --color-info: #22d3ee;
-    --shadow-color: rgba(96, 165, 250, 0.3);
+    --accent: #60a5fa;
+    --accent-hover: #93c5fd;
+    --accent-soft: rgba(96, 165, 250, 0.12);
 }
 
 /* ============================================
-   HEADER & NAVIGATION
+   Header & navigation
+
+   The `order` values pair with layouts/partials/header.html, which moves the
+   theme toggle out of .logo-switches to sit between the wordmark and the menu.
    ============================================ */
 
+.nav {
+    display: flex !important;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    flex-wrap: nowrap;
+}
+
 .logo {
-    order: 1;  /* Positions logo first */
+    order: 1;
 }
 
 .logo a {
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     font-weight: 700;
-    transition: all 0.3s ease;
 }
 
-.logo a:hover {
-    transform: scale(1.05);
-    filter: brightness(1.2);
+#theme-toggle {
+    background: transparent !important;
+    border: none;
+    padding: 0;
+    margin: 0 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+    order: 2;
+}
+
+#theme-toggle:hover {
+    background: transparent !important;
 }
 
 #menu {
     display: flex;
-    gap: 5px;
-    order: 3;  /* Positions menu last */
+    gap: 4px;
+    order: 3;
 }
 
 #menu a {
-    position: relative;
-    padding: 8px 12px;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-}
-
-#menu a::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-    transform: translateX(-50%);
-    transition: width 0.3s ease;
-    border-radius: 2px;
-}
-
-#menu a:hover::before {
-    width: 80%;
+    padding: 6px 10px;
+    border-radius: var(--radius);
 }
 
 #menu a:hover {
-    background: var(--bg-accent);
-    transform: translateY(-2px);
-}
-
-  /* ============================================
-     THEME TOGGLE BUTTON - Right Aligned
-     ============================================ */
-
-  /* Navigation layout - flex container for proper ordering */
-  .nav {
-      display: flex !important;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 1rem;
-      flex-wrap: nowrap;
-  }
-
-  /* Remove background and square from theme toggle */
-  #theme-toggle {
-      background: transparent !important;
-      border: none;
-      padding: 0;
-      margin-left: 15px; /* Space between logo and theme toggle */
-      margin-right: 15px; /* Space between theme toggle and menu */
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      transition: all 0.3s ease;
-      flex-shrink: 0; /* Prevent toggle from shrinking */
-      order: 2; /* Positions between logo (order: 1) and menu (order: 3) */
-  }
-
-  #theme-toggle:hover {
-      background: transparent !important;
-  }
-
-  /* Moon icon - shown in light mode, colored black */
-  #theme-toggle #moon {
-      stroke: #000000;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-
-  /* Sun icon - shown in dark mode, colored white */
-  #theme-toggle #sun {
-      stroke: #ffffff;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-  }
-
-  /* Hover effect - subtle scale without background */
-  #theme-toggle:hover svg {
-      transform: scale(1.2);
-      opacity: 0.8;
-  }
-
-  
-/* ============================================
-   TYPOGRAPHY - COLORFUL HEADERS
-   ============================================ */
-
-.post-content h1,
-.post-content h2 {
-    position: relative;
-    padding-left: 20px;
-}
-
-.post-content h1::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: var(--gradient-primary);
-    border-radius: 3px;
-}
-
-.post-content h2::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 4px;
-    background: var(--gradient-sunset);
-    border-radius: 3px;
-}
-
-.post-content h3 {
-    color: var(--color-primary);
-    border-bottom: 2px solid var(--color-primary);
-    padding-bottom: 5px;
-}
-
-.post-content h4 {
-    color: var(--color-secondary);
+    background: var(--accent-soft);
 }
 
 /* ============================================
-   LINKS - VIBRANT & INTERACTIVE
+   Links
    ============================================ */
 
 .post-content a,
-.post-entry a,
-article a {
-    color: var(--color-primary);
-    text-decoration: none;
-    border-bottom: 2px solid transparent;
-    background: linear-gradient(to right, var(--color-primary), var(--color-secondary));
-    background-size: 0% 2px;
-    background-repeat: no-repeat;
-    background-position: left bottom;
-    transition: all 0.3s ease;
+.post-description a,
+.entry-content a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
 }
 
 .post-content a:hover,
-.post-entry a:hover,
-article a:hover {
-    background-size: 100% 2px;
-    color: var(--color-secondary);
+.post-description a:hover,
+.entry-content a:hover {
+    color: var(--accent-hover);
 }
 
 /* ============================================
-   POST ENTRIES - COLORFUL CARDS
+   Homepage hero
    ============================================ */
 
+.hero {
+    margin: 2rem 0 3.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-name {
+    font-size: 2.25rem;
+    line-height: 1.2;
+    margin: 0 0 0.35rem;
+}
+
+.hero-role {
+    font-size: 1.05rem;
+    color: var(--secondary);
+    margin: 0 0 1rem;
+}
+
+.hero-tagline p {
+    margin: 0 0 1.5rem;
+    max-width: 60ch;
+    color: var(--content);
+}
+
+/* ============================================
+   Profile / contact buttons
+   Shared by the hero, the About page and the project-links shortcode.
+   ============================================ */
+
+.profile-buttons,
+.project-links {
+    display: flex;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+}
+
+.project-links {
+    margin: 2rem 0;
+}
+
+.profile-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+    color: var(--primary);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.profile-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.profile-btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.profile-btn-primary:hover {
+    background: var(--accent-hover);
+    border-color: var(--accent-hover);
+    color: #fff;
+}
+
+.profile-btn svg {
+    flex-shrink: 0;
+}
+
+/* ============================================
+   About page profile block
+   ============================================ */
+
+.about-profile {
+    text-align: center;
+    margin: 2rem 0 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.profile-image {
+    border-radius: 50%;
+    width: 180px;
+    height: 180px;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    display: block;
+}
+
+.profile-title {
+    margin: 0.5rem 0 0.25rem;
+    font-size: 1.9rem;
+}
+
+.profile-subtitle {
+    font-size: 1rem;
+    color: var(--secondary);
+    max-width: 55ch;
+    margin: 0 auto 1.75rem;
+}
+
+.about-profile .profile-buttons {
+    justify-content: center;
+}
+
+/* ============================================
+   Home / project card grid
+   ============================================ */
+
+.home-section {
+    margin-bottom: 3rem;
+}
+
+.home-section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.home-section-header h2 {
+    margin: 0;
+    font-size: 1.35rem;
+}
+
+.home-section-header a {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    white-space: nowrap;
+}
+
+.home-section-header a:hover {
+    color: var(--accent);
+}
+
+.home-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+}
+
 .post-entry {
-    position: relative;
-    transition: all 0.3s ease;
-    border-left: 4px solid transparent;
-    background: linear-gradient(var(--entry), var(--entry)) padding-box,
-                var(--gradient-primary) border-box;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-.post-entry::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: var(--gradient-primary);
-    transform: scaleX(0);
-    transition: transform 0.3s ease;
-}
-
-.post-entry:hover::before {
-    transform: scaleX(1);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: border-color 0.15s ease;
 }
 
 .post-entry:hover {
-    transform: translateX(8px) translateY(-4px);
-    box-shadow: 0 10px 30px var(--shadow-color);
-    border-left-color: var(--color-primary);
+    border-color: var(--accent);
 }
 
-/* Alternate colors for post entries */
-.post-entry:nth-child(3n+1):hover {
-    border-left-color: var(--color-primary);
+.entry-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    list-style: none;
+    margin: 0 0 0.75rem;
+    padding: 0;
 }
 
-.post-entry:nth-child(3n+2):hover {
-    border-left-color: var(--color-accent);
-}
-
-.post-entry:nth-child(3n+3):hover {
-    border-left-color: var(--color-success);
+.entry-stack li {
+    font-size: 0.75rem;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.15rem 0.45rem;
 }
 
 /* ============================================
-   TAGS & CATEGORIES - RAINBOW COLORS
+   Writing list — series groups and rows
    ============================================ */
 
-.post-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
+.series-group {
+    margin-bottom: 2.5rem;
 }
+
+.series-group-header {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.series-group-title {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.series-count {
+    font-size: 0.8rem;
+    color: var(--secondary);
+}
+
+.article-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.article-list-numbered {
+    counter-reset: part;
+}
+
+.article-list-numbered .article-row {
+    counter-increment: part;
+}
+
+.article-list-numbered .article-row-title::before {
+    content: counter(part) ". ";
+    color: var(--secondary);
+    font-weight: 400;
+}
+
+.article-row + .article-row {
+    border-top: 1px solid var(--border);
+}
+
+.article-row-link {
+    display: block;
+    padding: 1rem 0.5rem;
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: inherit;
+}
+
+.article-row-link:hover {
+    background: var(--accent-soft);
+}
+
+.article-row-title {
+    margin: 0 0 0.25rem;
+    font-size: 1.05rem;
+    color: var(--primary);
+}
+
+.article-row-link:hover .article-row-title {
+    color: var(--accent);
+}
+
+.article-row-subtitle {
+    margin: 0 0 0.4rem;
+    font-size: 0.9rem;
+    color: var(--content);
+}
+
+.article-row-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.8rem;
+    color: var(--secondary);
+}
+
+.draft-badge {
+    display: inline-block;
+    margin-left: 0.5rem;
+    padding: 0.1rem 0.4rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--secondary);
+    vertical-align: middle;
+}
+
+/* ============================================
+   Tags & tech chips
+   ============================================ */
 
 .post-tags a,
-.terms-tags a {
-    background: var(--gradient-primary);
-    color: white;
-    padding: 6px 14px;
-    border-radius: 20px;
+.terms-tags a,
+.tech-badge {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent);
+    border: 1px solid transparent;
+    border-radius: var(--radius);
+    padding: 0.2rem 0.55rem;
+    margin: 0.125rem;
     font-size: 0.85rem;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    border: none;
+    text-decoration: none;
+    white-space: nowrap;
 }
-
-/* Rainbow tag colors */
-.post-tags a:nth-child(6n+1) { background: var(--gradient-primary); }
-.post-tags a:nth-child(6n+2) { background: var(--gradient-sunset); }
-.post-tags a:nth-child(6n+3) { background: var(--gradient-ocean); }
-.post-tags a:nth-child(6n+4) { background: var(--gradient-forest); }
-.post-tags a:nth-child(6n+5) { background: var(--gradient-fire); }
-.post-tags a:nth-child(6n+6) { background: var(--gradient-sky); }
 
 .post-tags a:hover,
 .terms-tags a:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 6px 20px var(--shadow-color);
+    border-color: var(--accent);
 }
 
 /* ============================================
-   BUTTONS & INTERACTIVE ELEMENTS
+   Code blocks & tables
    ============================================ */
 
-button,
-.button,
-.post-entry .entry-footer a {
-    background: var(--gradient-primary);
-    color: white;
-    padding: 10px 16px;
-    border-radius: 8px;
-    border: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px var(--shadow-color);
+.post-content pre,
+.post-content .highlight {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
 }
 
-button:hover,
-.button:hover,
-.post-entry .entry-footer a:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px var(--shadow-color);
-    filter: brightness(1.1);
+.post-content code {
+    border-radius: var(--radius);
+}
+
+.post-content table {
+    display: block;
+    overflow-x: auto;
+    max-width: 100%;
+}
+
+.post-content table th {
+    background: var(--code-bg);
 }
 
 /* ============================================
-   CODE BLOCKS - VIBRANT ACCENTS
+   Blockquotes, TOC, search, breadcrumbs
    ============================================ */
 
-.highlight,
-pre {
-    border-left: 5px solid var(--color-primary);
-    border-radius: 8px;
-    position: relative;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+.post-content blockquote {
+    border-inline-start: 3px solid var(--accent);
+    background: var(--accent-soft);
+    padding: 0.5rem 1rem;
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-style: normal;
 }
-
-.highlight::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--gradient-primary);
-}
-
-code:not(pre code) {
-    background: var(--bg-accent);
-    color: var(--color-primary);
-    padding: 2px 6px;
-    border-radius: 4px;
-    font-weight: 600;
-}
-
-/* ============================================
-   SOCIAL ICONS - COLORFUL & ANIMATED
-   ============================================ */
-
-.social-icons a {
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.social-icons a:hover {
-    transform: scale(1.3) rotate(5deg);
-}
-
-.social-icons a:nth-child(1):hover { color: #6e5494; } /* GitHub */
-.social-icons a:nth-child(2):hover { color: #0077b5; } /* LinkedIn */
-.social-icons a:nth-child(3):hover { color: #ea4335; } /* Email */
-.social-icons a:nth-child(4):hover { color: #f26522; } /* RSS */
-
-/* ============================================
-   BREADCRUMBS - COLORFUL TRAIL
-   ============================================ */
-
-.breadcrumbs a {
-    color: var(--color-primary);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-.breadcrumbs a::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: var(--gradient-primary);
-    transition: width 0.3s ease;
-}
-
-.breadcrumbs a:hover::after {
-    width: 100%;
-}
-
-/* ============================================
-   HOME INFO SECTION
-   ============================================ */
-
-.home-info .entry-content {
-    border-left: 5px solid transparent;
-    border-image: var(--gradient-primary) 1;
-    padding-left: 20px;
-    background: var(--bg-accent);
-    padding: 20px;
-    border-radius: 8px;
-}
-
-/* ============================================
-   PAGINATION - COLORFUL NAVIGATION
-   ============================================ */
-
-.page-link,
-.pagination a {
-    color: var(--color-primary);
-    transition: all 0.3s ease;
-    padding: 8px 12px;
-    border-radius: 6px;
-}
-
-.page-link:hover,
-.pagination a:hover {
-    background: var(--gradient-primary);
-    color: white;
-    transform: scale(1.1);
-}
-
-/* ============================================
-   TABLE OF CONTENTS
-   ============================================ */
 
 .toc {
-    border-left: 4px solid transparent;
-    border-image: var(--gradient-primary) 1;
-    background: var(--bg-accent);
-    border-radius: 8px;
-    padding: 15px;
-}
-
-.toc a {
-    color: var(--color-primary);
-    transition: all 0.3s ease;
-    display: inline-block;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--entry);
 }
 
 .toc a:hover {
-    color: var(--color-secondary);
-    transform: translateX(10px);
-}
-
-/* ============================================
-   SEARCH BOX
-   ============================================ */
-
-#searchInput {
-    border: 2px solid var(--border);
-    transition: all 0.3s ease;
-    border-radius: 8px;
+    color: var(--accent);
 }
 
 #searchInput:focus {
-    border: 2px solid transparent;
-    border-image: var(--gradient-primary) 1;
     outline: none;
-    box-shadow: 0 0 20px var(--shadow-color);
+    border-color: var(--accent);
+}
+
+.breadcrumbs a:hover {
+    color: var(--accent);
 }
 
 /* ============================================
-   SCROLLBAR - COLORFUL
+   Hamburger menu (mobile only)
+   Pairs with the checkbox + label in layouts/partials/header.html.
    ============================================ */
 
-::-webkit-scrollbar {
-    width: 12px;
-}
-
-::-webkit-scrollbar-track {
-    background: var(--theme);
-}
-
-::-webkit-scrollbar-thumb {
-    background: var(--gradient-primary);
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: var(--gradient-sunset);
-}
-
-/* ============================================
-   READING PROGRESS BAR (Optional)
-   ============================================ */
-
-.post-content::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: var(--gradient-primary);
-    z-index: 1000;
-    animation: reading-progress linear;
-    animation-timeline: scroll();
-}
-
-/* ============================================
-   FOOTER LINKS
-   ============================================ */
-
-footer a {
-    color: var(--color-primary);
-    transition: all 0.3s ease;
-    position: relative;
-}
-
-footer a:hover {
-    color: var(--color-secondary);
-}
-
-/* ============================================
-   CATEGORY BADGES
-   ============================================ */
-
-.entry-header .entry-hint {
-    background: var(--gradient-primary);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.8rem;
-}
-
-/* ============================================
-   BLOCKQUOTES - COLORFUL ACCENTS
-   ============================================ */
-
-blockquote {
-    border-left: 5px solid transparent;
-    border-image: var(--gradient-primary) 1;
-    background: var(--bg-accent);
-    padding: 15px 20px;
-    border-radius: 0 8px 8px 0;
-    margin: 20px 0;
-    position: relative;
-}
-
-blockquote::before {
-    content: '"';
-    font-size: 4rem;
-    position: absolute;
-    left: 10px;
-    top: -10px;
-    color: var(--color-primary);
-    opacity: 0.2;
-}
-
-/* ============================================
-   ANIMATIONS
-   ============================================ */
-
-@keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-
-.logo a {
-    background-size: 200% 200%;
-    animation: gradient-shift 3s ease infinite;
-}
-
-/* ============================================
-   RESPONSIVE ADJUSTMENTS
-   ============================================ */
-
-/* ============================================
-   HAMBURGER MENU (Mobile Only)
-   ============================================ */
-
-/* Hide checkbox */
-.menu-toggle {
-    display: none;
-}
-
-/* Hamburger icon - hidden on desktop */
+.menu-toggle,
 .menu-icon {
     display: none;
 }
 
 @media (max-width: 768px) {
-    /* Navigation adjustments for mobile */
+    .home-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-name {
+        font-size: 1.85rem;
+    }
+
     .nav {
         gap: 0.5rem !important;
         padding: 0.5rem;
@@ -596,14 +481,13 @@ blockquote::before {
     .logo {
         order: 1;
         flex: 0 0 auto;
-        max-width: 50%;
+        max-width: 60%;
     }
 
     .logo a {
         font-size: 1.1rem;
     }
 
-    /* Hamburger Icon Styling */
     .menu-icon {
         display: flex;
         flex-direction: column;
@@ -623,10 +507,9 @@ blockquote::before {
         height: 3px;
         background: var(--content);
         border-radius: 3px;
-        transition: all 0.3s ease;
+        transition: transform 0.2s ease, opacity 0.2s ease;
     }
 
-    /* Hamburger animation when checked */
     .menu-toggle:checked ~ .menu-icon span:nth-child(1) {
         transform: rotate(45deg) translate(7px, 7px);
     }
@@ -651,7 +534,6 @@ blockquote::before {
         height: 20px;
     }
 
-    /* Menu - Hidden by default */
     #menu {
         order: 4;
         width: 100%;
@@ -660,12 +542,9 @@ blockquote::before {
         max-height: 0;
         overflow: hidden;
         opacity: 0;
-        transition: max-height 0.3s ease, opacity 0.3s ease, margin-top 0.3s ease;
-        border-top: none;
-        padding-top: 0;
+        transition: max-height 0.2s ease, opacity 0.2s ease;
     }
 
-    /* Menu - Visible when checkbox is checked */
     .menu-toggle:checked ~ #menu {
         max-height: 500px;
         opacity: 1;
@@ -683,364 +562,16 @@ blockquote::before {
         width: 100%;
         text-align: left;
         display: block;
-        border-radius: 4px;
     }
 
-    #menu a::before {
-        display: none;
-    }
-
-    .post-content h1::before,
-    .post-content h2::before {
-        width: 3px;
-    }
-
-    .post-entry:hover {
-        transform: translateX(4px) translateY(-2px);
+    .profile-buttons {
+        justify-content: center;
     }
 }
 
-/* ============================================
-   ARTICLE LIST STYLES
-   ============================================ */
-
-/* Series Card Header Layout */
-.series-main-content {
-    display: flex;
-    align-items: center;
-    gap: 1.5rem;
-    flex: 1;
-}
-
-/* Articles List */
-.articles-list {
-    padding: 0;
-    background: var(--theme);
-}
-
-/* Article List Item */
-.article-list-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 1.5rem;
-    padding: 1.75rem 2rem;
-    border-bottom: 1px solid var(--border);
-    transition: all 0.3s ease;
-    text-decoration: none;
-    color: inherit;
-    position: relative;
-}
-
-.article-list-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 5px;
-    background: var(--gradient-primary);
-    transform: scaleY(0);
-    transition: transform 0.3s ease;
-}
-
-.article-list-item:hover::before {
-    transform: scaleY(1);
-}
-
-.article-list-item:hover {
-    background: var(--bg-accent);
-    padding-left: 2.5rem;
-}
-
-.article-list-item:last-child {
-    border-bottom: none;
-}
-
-/* Article Number/Bullet */
-.article-number {
-    flex-shrink: 0;
-    width: 35px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 2px;
-}
-
-.bullet {
-    font-size: 2rem;
-    color: var(--color-primary);
-    font-weight: bold;
-    line-height: 1;
-}
-
-/* Article Content */
-.article-content {
-    flex: 1;
-    min-width: 0;
-}
-
-.article-list-item .article-title {
-    font-size: 1.4rem;
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    line-height: 1.3;
-    color: var(--content);
-    transition: color 0.3s ease;
-}
-
-.article-list-item:hover .article-title {
-    color: var(--color-primary);
-}
-
-.article-list-item .article-subtitle {
-    color: var(--secondary);
-    font-size: 1.05rem;
-    font-style: italic;
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-    padding-left: 14px;
-    border-left: 4px solid var(--color-accent);
-}
-
-.article-description {
-    color: var(--secondary);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 0.75rem;
-}
-
-/* Article Meta */
-.article-meta {
-    display: flex;
-    gap: 1.5rem;
-    align-items: center;
-    font-size: 0.875rem;
-    color: var(--secondary);
-    margin-top: 0.5rem;
-}
-
-.article-date,
-.article-reading-time {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-.article-date svg,
-.article-reading-time svg {
-    flex-shrink: 0;
-    opacity: 0.7;
-}
-
-/* Draft Badge */
-.draft-badge {
-    display: inline-block;
-    background: var(--color-warning);
-    color: white;
-    font-size: 0.7rem;
-    padding: 4px 10px;
-    border-radius: 6px;
-    margin-left: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-/* Article Arrow */
-.article-arrow {
-    flex-shrink: 0;
-    color: var(--color-primary);
-    transition: transform 0.3s ease;
-    opacity: 0.6;
-    align-self: center;
-}
-
-.article-list-item:hover .article-arrow {
-    transform: translateX(8px);
-    opacity: 1;
-}
-
-/* Responsive for Article List */
-@media (max-width: 768px) {
-    .article-list-item {
-        flex-direction: column;
-        gap: 1rem;
-        padding: 1.5rem;
-    }
-
-    .article-number {
-        width: 100%;
-        justify-content: flex-start;
-    }
-
-    .article-arrow {
-        display: none;
-    }
-
-    .article-list-item .article-title {
-        font-size: 1.2rem;
-    }
-
-    .article-list-item .article-subtitle {
-        font-size: 0.95rem;
-    }
-}
-
-/* ============================================
-   SERIES CARD COLLAPSE/EXPAND STYLES
-   ============================================ */
-
-/* Series Container */
-.series-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-top: 2rem;
-}
-
-/* Series Card */
-.series-card {
-    border: 2px solid var(--border);
-    border-radius: 12px;
-    background: var(--entry);
-    overflow: hidden;
-    transition: all 0.3s ease;
-}
-
-.series-card:hover {
-    border-color: var(--color-primary);
-    box-shadow: 0 4px 20px var(--shadow-color);
-}
-
-/* Series Card Header (Clickable) */
-.series-card-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 2rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    background: var(--theme);
-}
-
-.series-card-header:hover {
-    background: var(--bg-accent);
-}
-
-.series-card.expanded .series-card-header {
-    border-bottom: 2px solid var(--border);
-}
-
-/* Series Icon */
-.series-icon {
-    font-size: 2.5rem;
-    flex-shrink: 0;
-}
-
-/* Series Info */
-.series-info {
-    flex: 1;
-    min-width: 0;
-}
-
-.series-name {
-    font-size: 1.6rem;
-    font-weight: 700;
-    margin-bottom: 0.5rem;
-    color: var(--content);
-    background: var(--gradient-primary);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.series-subtitle {
-    font-size: 1rem;
-    color: var(--secondary);
-    line-height: 1.5;
-    margin-bottom: 0.75rem;
-}
-
-.series-meta {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-.article-count {
-    font-size: 0.875rem;
-    color: var(--color-primary);
-    font-weight: 600;
-    background: rgba(37, 99, 235, 0.1);
-    padding: 4px 12px;
-    border-radius: 8px;
-}
-
-/* Chevron Toggle */
-.series-toggle {
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    background: var(--border);
-}
-
-.series-card-header:hover .series-toggle {
-    background: var(--color-primary);
-}
-
-.series-toggle .chevron {
-    color: var(--content);
-    transition: transform 0.3s ease;
-}
-
-.series-card-header:hover .chevron {
-    color: white;
-}
-
-.series-card.expanded .chevron {
-    transform: rotate(180deg);
-}
-
-/* Series Articles (Collapsible Content) */
-.series-articles {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.series-card.expanded .series-articles {
-    max-height: 5000px; /* Large enough to accommodate all articles */
-}
-
-/* Responsive for Series Cards */
-@media (max-width: 768px) {
-    .series-card-header {
-        padding: 1.5rem;
-    }
-
-    .series-main-content {
-        gap: 1rem;
-    }
-
-    .series-icon {
-        font-size: 2rem;
-    }
-
-    .series-name {
-        font-size: 1.3rem;
-    }
-
-    .series-subtitle {
-        font-size: 0.9rem;
-    }
-
-    .series-toggle {
-        width: 40px;
-        height: 40px;
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
+        animation: none !important;
     }
 }
